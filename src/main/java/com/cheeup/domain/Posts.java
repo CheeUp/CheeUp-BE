@@ -15,29 +15,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Members {
+public class Posts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String kakaoId;
+    @Column(nullable = false, length = 255)
+    private String title;
 
-    @Column(nullable = false, length = 20)
-    private String name;
+    @Column(nullable = false)
+    private String content;
 
-    @Column(nullable = false, length = 50)
-    private String email;
+    private Integer likeCount = 0;
 
-    @Column(nullable = false, length = 20)
-    private String nickname;
-
-    @Column(nullable = true, length = 20)
-    private String role = "role_member";
-
-    @Column(nullable = true, length = 225)
-    private String githubLink;
+    private Integer commentCount = 0;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -47,5 +39,4 @@ public class Members {
 
     @Column(nullable = true)
     private LocalDateTime deletedAt;
-
 }
