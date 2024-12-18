@@ -2,14 +2,12 @@ package com.cheeup.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class PortfolioPersonalInfos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
