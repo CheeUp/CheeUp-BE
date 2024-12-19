@@ -1,6 +1,5 @@
 package com.cheeup.domain;
 
-import com.cheeup.domain.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,36 +14,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Members {
+public class MemberFiles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30, unique = true)
-    private String kakaoId;
-
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 255)
     private String name;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String email;
-
-    @Column(nullable = false, length = 20)
-    private String nickname;
-
-    @Column(nullable = false, length = 20)
-    @Enumerated(EnumType.STRING)
-    private MemberRole role = MemberRole.GUEST;
-
-    @Column(length = 225)
-    private String githubLink;
-
-    @Column(length = 225)
-    private String profileImageUrl;
-
-    @Column(nullable = false, length = 225)
-    private Boolean isActivated = true;
+    @Column(nullable = false, length = 255)
+    private String url;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -53,5 +33,6 @@ public class Members {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
-
 }
+
+
