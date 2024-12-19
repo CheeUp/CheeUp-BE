@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioTechSkils {
+public class PortfolioTechSkills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
