@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -34,7 +35,8 @@ public class Members {
     private String nickname;
 
     @Column(nullable = true, length = 20)
-    private String role = "role_member";
+    @Enumerated(EnumType.STRING)
+    private MemberRole role = MemberRole.MEMBER;
 
     @Column(nullable = true, length = 225)
     private String githubLink;
