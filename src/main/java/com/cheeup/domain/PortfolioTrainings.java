@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.TrainingStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,8 +16,17 @@ public class PortfolioTrainings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 50)
     private String name;
+
+    @Column(nullable = false, length = 20)
+    private String company;
+
+    private String description;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TrainingStatus trainingStatus;
 
     @Column(nullable = false)
     private Date startDate;
@@ -25,3 +35,5 @@ public class PortfolioTrainings {
 
     private String content;
 }
+
+
