@@ -1,5 +1,7 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.MajorTime;
+import com.cheeup.domain.enums.MajorType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,10 +18,12 @@ public class PortfolioUniversityMajors {
     private Long id;
 
     @Column(nullable = false)
-    private Integer type;
+    @Enumerated(EnumType.STRING)
+    private MajorType majorType;
 
     @Column(nullable = false)
-    private Integer studyTimeType;
+    @Enumerated(EnumType.STRING)
+    private MajorTime majorTime;
 
     @Column(nullable = false, precision = 3, scale = 2)
     private BigDecimal grade;
