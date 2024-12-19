@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.CareerStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,8 @@ public class PortfolioCareers {
     private Long id;
 
     @Column(nullable = false)
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private CareerStatus careerStatus;
 
     @Column(nullable = false, length = 20)
     private String company;
