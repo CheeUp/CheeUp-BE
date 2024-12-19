@@ -1,5 +1,9 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.GraduateDegree;
+import com.cheeup.domain.enums.UniversityCampus;
+import com.cheeup.domain.enums.UniversityEntry;
+import com.cheeup.domain.enums.UniversityStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,16 +27,20 @@ public class PortfolioGraduates {
     private String region;
 
     @Column(nullable = false)
-    private Integer degreeType;
+    @Enumerated(EnumType.STRING)
+    private GraduateDegree graduateDegree;
 
     @Column(nullable = false)
-    private Integer campusType;
+    @Enumerated(EnumType.STRING)
+    private UniversityCampus universityCampus;
 
     @Column(nullable = false)
-    private Integer entryType;
+    @Enumerated(EnumType.STRING)
+    private UniversityEntry universityEntry;
 
     @Column(nullable = false)
-    private Integer graduatedType;
+    @Enumerated(EnumType.STRING)
+    private UniversityStatus universityStatus;
 
     @Column(nullable = false)
     private Date startDate;
