@@ -27,7 +27,12 @@ public class Posts {
     @Column(nullable = false)
     private String content;
 
-    private Integer likeCount = 0;
+    private Integer like = 0;
+
+    private Integer scrap = 0;
+
+    @Column(nullable = false)
+    private Boolean isAnonymous;
 
     @CreatedDate
     private LocalDateTime createdAt;
