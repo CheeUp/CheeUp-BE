@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.FileType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,7 +28,8 @@ public class PortfolioProjectFiles {
     private String fileSize;
 
     @Column(nullable = false)
-    private Integer fileType;
+    @Enumerated(EnumType.STRING)
+    private FileType fileType;
 
     @Column(nullable = false, length = 255)
     private String url;
