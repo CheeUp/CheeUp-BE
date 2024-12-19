@@ -19,11 +19,11 @@ public class PortflioGraduateMajors {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MajorType majorType;
+    private MajorType type;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MajorTime majorTime;
+    private MajorTime time;
 
     @Column(nullable = false, precision = 3, scale = 2)
     private BigDecimal grade;

@@ -16,7 +16,7 @@ public class PortfolioDisabilities {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private DisabilityType disabilityType;
+    private DisabilityType type;
 
     @Column(nullable = false)
     private Integer grade;

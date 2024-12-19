@@ -18,23 +18,23 @@ public class PortfolioMilitaries {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryType militaryType;
+    private MilitaryType type;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryBranch militaryBranch;
+    private MilitaryBranch branch;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitarySpecialty militarySpecialty;
+    private MilitarySpecialty specialty;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryRank militaryRank;
+    private MilitaryRank rank;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryDischarge militaryDischarge;
+    private MilitaryDischarge discharge;
 
     @Column(nullable = false)
     private Date startDate;

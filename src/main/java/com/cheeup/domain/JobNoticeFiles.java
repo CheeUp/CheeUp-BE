@@ -29,7 +29,7 @@ public class JobNoticeFiles {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private FileType fileType;
+    private FileType type;
 
     @Column(nullable = false, length = 255)
     private String url;

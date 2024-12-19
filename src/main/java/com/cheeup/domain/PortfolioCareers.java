@@ -18,7 +18,7 @@ public class PortfolioCareers {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private CareerStatus careerStatus;
+    private CareerStatus status;
 
     @Column(nullable = false, length = 20)
     private String company;

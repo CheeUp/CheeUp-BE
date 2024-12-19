@@ -31,6 +31,8 @@ public class Posts {
 
     private Integer scrap = 0;
 
+    private Integer hit = 0;
+
     @Column(nullable = false)
     private Boolean isAnonymous;
 

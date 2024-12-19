@@ -28,19 +28,19 @@ public class PortfolioGraduates {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private GraduateDegree graduateDegree;
+    private GraduateDegree degree;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UniversityCampus universityCampus;
+    private UniversityCampus campus;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UniversityEntry universityEntry;
+    private UniversityEntry entry;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UniversityStatus universityStatus;
+    private UniversityStatus status;
 
     @Column(nullable = false)
     private Date startDate;

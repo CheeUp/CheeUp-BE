@@ -26,7 +26,7 @@ public class PortfolioTrainings {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TrainingStatus trainingStatus;
+    private TrainingStatus status;
 
     @Column(nullable = false)
     private Date startDate;
