@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.DisabilityType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,8 @@ public class PortfolioDisabilities {
     private Long id;
 
     @Column(nullable = false)
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private DisabilityType disabilityType;
 
     @Column(nullable = false)
     private Integer grade;
