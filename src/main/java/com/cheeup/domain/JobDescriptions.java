@@ -27,4 +27,6 @@ public class JobDescriptions {
 
     @Column(nullable = false, length = 100)
     private String requirement;
+
+    private String preferredRequirement;
 }
