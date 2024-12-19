@@ -1,5 +1,7 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.HighSchoolMajor;
+import com.cheeup.domain.enums.HighSchoolType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,10 +22,12 @@ public class PortfolioHighSchools {
     private String name;
 
     @Column(nullable = false)
-    private Integer major;
+    @Enumerated(EnumType.STRING)
+    private HighSchoolMajor major;
 
     @Column(nullable = false)
-    private Integer type;
+    @Enumerated(EnumType.STRING)
+    private HighSchoolType type;
 
     @Column(nullable = false)
     private Date startDate;
