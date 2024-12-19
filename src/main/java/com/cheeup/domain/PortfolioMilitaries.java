@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,19 +17,24 @@ public class PortfolioMilitaries {
     private Long id;
 
     @Column(nullable = false)
-    private Integer type;
+    @Enumerated(EnumType.STRING)
+    private MilitaryType militaryType;
 
     @Column(nullable = false)
-    private Integer branch;
+    @Enumerated(EnumType.STRING)
+    private MilitaryBranch militaryBranch;
 
     @Column(nullable = false)
-    private Integer specialty;
+    @Enumerated(EnumType.STRING)
+    private MilitarySpecialty militarySpecialty;
 
     @Column(nullable = false)
-    private Integer rank;
+    @Enumerated(EnumType.STRING)
+    private MilitaryRank militaryRank;
 
     @Column(nullable = false)
-    private Integer dischargeType;
+    @Enumerated(EnumType.STRING)
+    private MilitaryDischarge militaryDischarge;
 
     @Column(nullable = false)
     private Date startDate;
