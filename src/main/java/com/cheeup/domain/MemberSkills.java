@@ -1,4 +1,4 @@
-package com.cheeup.domain.mapping;
+package com.cheeup.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioProjectSkills {
+public class MemberSkills {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

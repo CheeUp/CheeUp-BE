@@ -1,4 +1,4 @@
-package com.cheeup.domain.mapping;
+package com.cheeup.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
