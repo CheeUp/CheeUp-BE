@@ -1,5 +1,6 @@
 package com.cheeup.domain;
 
+import com.cheeup.domain.enums.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,5 +15,6 @@ public class PortfolioSkills {
     private Long id;
 
     @Column(nullable = false)
-    private Integer level;
+    @Enumerated(EnumType.STRING)
+    private SkillLevel level;
 }

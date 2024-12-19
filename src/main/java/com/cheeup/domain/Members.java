@@ -22,23 +22,23 @@ public class Members {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String kakaoId;
 
     @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
 
     @Column(nullable = false, length = 20)
     private String nickname;
 
-    @Column(nullable = true, length = 20)
+    @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private MemberRole role = MemberRole.MEMBER;
+    private MemberRole role = MemberRole.GUEST;
 
-    @Column(nullable = true, length = 225)
+    @Column(length = 225)
     private String githubLink;
 
     @CreatedDate
