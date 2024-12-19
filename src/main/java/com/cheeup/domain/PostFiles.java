@@ -2,7 +2,6 @@ package com.cheeup.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,29 +14,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Members {
-
+public class PostFiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String kakaoId;
+    @Column(nullable = false, length = 255)
+    private String originFileName;
 
-    @Column(nullable = false, length = 20)
-    private String name;
+    @Column(nullable = false, length = 255)
+    private String fileSize;
 
-    @Column(nullable = false, length = 50)
-    private String email;
+    @Column(nullable = false)
+    private Integer fileType;
 
-    @Column(nullable = false, length = 20)
-    private String nickname;
-
-    @Column(nullable = true, length = 20)
-    private String role = "role_member";
-
-    @Column(nullable = true, length = 225)
-    private String githubLink;
+    @Column(nullable = false, length = 255)
+    private String url;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -46,5 +38,4 @@ public class Members {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
-
 }

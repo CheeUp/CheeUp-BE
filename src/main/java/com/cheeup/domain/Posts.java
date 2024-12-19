@@ -29,14 +29,11 @@ public class Posts {
 
     private Integer likeCount = 0;
 
-    private Integer commentCount = 0;
-
     @CreatedDate
     private LocalDateTime createdAt;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @Column(nullable = true)
     private LocalDateTime deletedAt;
 }
