@@ -13,26 +13,39 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioProjects {
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "portfolio_authors")
+public class PortfolioAuthor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String title;
+    @Column(nullable = false, length = 10)
+    private String name;
 
-    @Column(nullable = false, length = 255)
-    private String outline;
+    @Column(nullable = false, length = 50)
+    private String email;
 
-    @Column(nullable = false)
-    private String role;
-
-    @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private String result;
+    @Column(nullable = false, length = 255)
+    private String githubUrl;
+
+    @Column(nullable = false, length = 255)
+    private String blogUrl;
 
     @Column(nullable = false)
-    private String githubUrl;
+    private Boolean open = false;
+
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
 }

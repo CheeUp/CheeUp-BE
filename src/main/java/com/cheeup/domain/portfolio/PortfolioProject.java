@@ -3,14 +3,13 @@ package com.cheeup.domain.portfolio;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioTheses {
+@Table(name = "portfolio_projects")
+public class PortfolioProject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,17 +17,18 @@ public class PortfolioTheses {
     @Column(nullable = false, length = 255)
     private String title;
 
+    @Column(nullable = false, length = 255)
+    private String outline;
+
+    @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
     private String result;
 
-    @Column(length = 30)
-    private String submissionTarget;
-
     @Column(nullable = false)
-    private Date submissionDate;
-
-    @Column(nullable = false)
-    private Date startDate;
-
-    @Column(nullable = false)
-    private Date endDate;
+    private String githubUrl;
 }

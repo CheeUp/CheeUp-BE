@@ -1,9 +1,9 @@
 package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.GraduateDegree;
 import com.cheeup.domain.enums.UniversityCampus;
 import com.cheeup.domain.enums.UniversityEntry;
 import com.cheeup.domain.enums.UniversityStatus;
+import com.cheeup.domain.enums.UniversityType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +14,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioGraduates {
+@Table(name = "portfolio_universities")
+public class PortfolioUniversity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,7 @@ public class PortfolioGraduates {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private GraduateDegree degree;
+    private UniversityType type;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,6 +46,7 @@ public class PortfolioGraduates {
     @Column(nullable = false)
     private Date startDate;
 
-    @Column(nullable = false)
     private Date endDate;
+
+    private Date leaveDate;
 }

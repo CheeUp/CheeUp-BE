@@ -14,27 +14,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Portfolios {
-
+@Table(name = "portfolio_feedbacks")
+public class PortfolioFeedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String title;
+    @Column(nullable = false)
+    private String content;
 
     @Column(nullable = false)
-    private Integer type;
-
-    @Column(nullable = false)
-    private Integer order;
+    private Integer like = 0;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = true)
     private LocalDateTime deletedAt;
 }

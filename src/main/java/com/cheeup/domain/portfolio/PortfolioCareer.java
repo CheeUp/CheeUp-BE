@@ -11,7 +11,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioCareers {
+@Table(name = "portfolio_careers")
+public class PortfolioCareer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,11 +24,15 @@ public class PortfolioCareers {
     @Column(nullable = false, length = 20)
     private String company;
 
+    @Column(nullable = false, length = 30)
+    private String role;
+
+    private String description;
+
     @Column(nullable = false)
     private Date startDate;
 
-    @Column(nullable = false)
     private Date endDate;
 
-    private String description;
+    private Date leaveDate;
 }

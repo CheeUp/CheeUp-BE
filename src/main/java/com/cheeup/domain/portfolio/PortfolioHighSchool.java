@@ -1,6 +1,7 @@
 package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.TrainingStatus;
+import com.cheeup.domain.enums.HighSchoolMajor;
+import com.cheeup.domain.enums.HighSchoolType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,29 +12,27 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioTrainings {
+@Table(name = "portfolio_high_schools")
+public class PortfolioHighSchool {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String name;
-
-    @Column(nullable = false, length = 20)
-    private String company;
-
-    private String description;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TrainingStatus status;
+    private HighSchoolMajor major;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private HighSchoolType type;
 
     @Column(nullable = false)
     private Date startDate;
 
+    @Column(nullable = false)
     private Date endDate;
-
-    private String content;
 }
-
-

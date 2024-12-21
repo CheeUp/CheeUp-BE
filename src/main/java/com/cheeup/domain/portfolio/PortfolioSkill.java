@@ -9,7 +9,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioSkills {
+@Table(name = "portfolio_skills")
+public class PortfolioSkill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,4 +18,6 @@ public class PortfolioSkills {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SkillLevel level;
+
+    private String description;
 }

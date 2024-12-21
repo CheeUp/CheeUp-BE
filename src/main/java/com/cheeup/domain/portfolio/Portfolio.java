@@ -1,6 +1,5 @@
 package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.FileType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,31 +14,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class PortfolioProjectFiles {
+@Table(name = "portfolios")
+public class Portfolio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String originalFileName;
-
-    @Column(nullable = false, length = 255)
-    private String fileSize;
+    @Column(nullable = false, length = 50)
+    private String title;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private FileType type;
-
-    @Column(nullable = false, length = 255)
-    private String url;
+    private Boolean open = false;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = true)
     private LocalDateTime deletedAt;
 }

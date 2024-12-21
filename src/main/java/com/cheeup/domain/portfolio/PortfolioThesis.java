@@ -10,18 +10,23 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioCertificates {
-
+@Table(name = "portfolio_theses")
+public class PortfolioThesis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(nullable = false, length = 255)
-    private String rating;
+    @Column(nullable = false, length = 100)
+    private String subTitle;
+
+    private String summary;
+
+    @Column(length = 30)
+    private String submissionTarget;
 
     @Column(nullable = false)
-    private Date awardDate;
+    private Date submissionDate;
 }

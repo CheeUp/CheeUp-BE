@@ -1,27 +1,26 @@
 package com.cheeup.domain.portfolio;
 
+import com.cheeup.domain.enums.DisabilityType;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioAwards {
+@Table(name = "portfolio_disabilities")
+public class PortfolioDisability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String title;
-
-    @Column(nullable = false, length = 255)
-    private String rating;
-
     @Column(nullable = false)
-    private Date acquisitionDate;
+    private Boolean status;
 
+    @Enumerated(EnumType.STRING)
+    private DisabilityType type;
+
+    private Integer grade;
 }
+

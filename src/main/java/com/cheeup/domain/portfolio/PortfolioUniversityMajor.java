@@ -12,7 +12,8 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioUniversityMajors {
+@Table(name = "portfolio_university_majors")
+public class PortfolioUniversityMajor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

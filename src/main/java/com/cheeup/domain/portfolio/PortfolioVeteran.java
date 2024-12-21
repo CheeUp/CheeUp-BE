@@ -8,20 +8,20 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioVeterans {
+@Table(name = "portfolio_veterans")
+public class PortfolioVeteran {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Integer status;
+    private Boolean status;
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String relation;
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String number;
 
-    @Column(nullable = false)
     private Integer ratio;
 }
