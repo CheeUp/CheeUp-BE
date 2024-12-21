@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.common;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,11 +8,13 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Jobs {
+@Table(name = "skills")
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 20)
-    private String title;
+    @Column(nullable = false, length = 50)
+    private String name;
 }
+

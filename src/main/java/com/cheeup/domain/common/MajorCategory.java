@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.common;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +8,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Majors {
+@Table(name = "major_categories")
+public class MajorCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
