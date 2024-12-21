@@ -1,5 +1,6 @@
 package com.cheeup.domain.member;
 
+import com.cheeup.domain.common.Skill;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,4 +14,12 @@ public class MemberSkill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "skill_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Skill skill;
 }

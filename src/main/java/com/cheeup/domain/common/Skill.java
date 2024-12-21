@@ -1,7 +1,10 @@
 package com.cheeup.domain.common;
 
+import com.cheeup.domain.member.MemberSkill;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,5 +19,8 @@ public class Skill {
 
     @Column(nullable = false, length = 50)
     private String name;
+
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+    private List<MemberSkill> memberSkillList;
 }
 

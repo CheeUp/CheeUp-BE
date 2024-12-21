@@ -23,6 +23,10 @@ public class MemberActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Member member;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ActivityType type;
