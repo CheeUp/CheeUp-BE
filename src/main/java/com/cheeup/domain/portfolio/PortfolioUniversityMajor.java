@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,6 +19,10 @@ public class PortfolioUniversityMajor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "portfolio_university_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private PortfolioUniversity portfolioUniversity;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -32,5 +38,7 @@ public class PortfolioUniversityMajor {
     @Column(nullable = false, precision = 3, scale = 2)
     private BigDecimal maxGrade;
 
+    @OneToMany(mappedBy = "portfolioUniversity", cascade = CascadeType.ALL)
+    private List<PortfolioUniversityMajor> portfolioUniversityMajorList = new ArrayList<>();
 }
 

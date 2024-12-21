@@ -22,6 +22,10 @@ public class PortfolioProjectFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "portfolio_project_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private PortfolioProject portfolioProject;
+
     @Column(nullable = false, length = 255)
     private String name;
 

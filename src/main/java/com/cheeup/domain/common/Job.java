@@ -1,7 +1,11 @@
 package com.cheeup.domain.common;
 
+import com.cheeup.domain.portfolio.Portfolio;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -15,4 +19,7 @@ public class Job {
 
     @Column(nullable = false, length = 20)
     private String title;
+
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    private List<Portfolio> portfolioList = new ArrayList<>();
 }

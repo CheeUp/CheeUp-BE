@@ -1,9 +1,12 @@
 package com.cheeup.domain.common;
 
 import com.cheeup.domain.member.MemberSkill;
+import com.cheeup.domain.portfolio.PortfolioProjectSkill;
+import com.cheeup.domain.portfolio.PortfolioSkill;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,5 +25,11 @@ public class Skill {
 
     @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
     private List<MemberSkill> memberSkillList;
+
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+    private List<PortfolioSkill> portfolioSkillList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+    private List<PortfolioProjectSkill> portfolioProjectSkillList = new ArrayList<>();
 }
 

@@ -7,7 +7,9 @@ import com.cheeup.domain.enums.UniversityStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +22,10 @@ public class PortfolioGraduate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Portfolio portfolio;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -49,4 +55,7 @@ public class PortfolioGraduate {
     private Date endDate;
 
     private Date leaveDate;
+
+    @OneToMany(mappedBy = "portfolioGraduate", cascade = CascadeType.ALL)
+    private List<PortfolioGraduateMajor> portfolioGraduateMajorList = new ArrayList<>();
 }

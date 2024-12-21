@@ -17,6 +17,11 @@ public class PortfolioCareer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Portfolio portfolio;
+
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CareerStatus status;

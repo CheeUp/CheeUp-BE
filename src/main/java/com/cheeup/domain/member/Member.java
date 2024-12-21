@@ -3,6 +3,9 @@ package com.cheeup.domain.member;
 import com.cheeup.domain.community.*;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
+import com.cheeup.domain.portfolio.Portfolio;
+import com.cheeup.domain.portfolio.PortfolioFeedback;
+import com.cheeup.domain.portfolio.PortfolioFeedbackLike;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -102,5 +105,14 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<CommentReport> commentReportList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Portfolio> portfolioList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<PortfolioFeedback> portfolioFeedbackList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<PortfolioFeedbackLike> portfolioFeedbackLikeList = new ArrayList<>();
 }
 
