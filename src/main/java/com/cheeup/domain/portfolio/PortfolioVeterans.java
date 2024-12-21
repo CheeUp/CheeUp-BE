@@ -1,33 +1,27 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.CareerStatus;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioCareers {
+public class PortfolioVeterans {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CareerStatus status;
+    private Integer status;
 
     @Column(nullable = false, length = 20)
-    private String company;
+    private String relation;
+
+    @Column(nullable = false, length = 20)
+    private String number;
 
     @Column(nullable = false)
-    private Date startDate;
-
-    @Column(nullable = false)
-    private Date endDate;
-
-    private String description;
+    private Integer ratio;
 }

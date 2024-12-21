@@ -1,7 +1,5 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.HighSchoolMajor;
-import com.cheeup.domain.enums.HighSchoolType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,22 +10,21 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioHighSchools {
-
+public class PortfolioTheses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(nullable = false, length = 255)
+    private String title;
+
+    private String result;
+
+    @Column(length = 30)
+    private String submissionTarget;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private HighSchoolMajor major;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private HighSchoolType type;
+    private Date submissionDate;
 
     @Column(nullable = false)
     private Date startDate;

@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioLanguages {
+public class PortfolioCertificates {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +23,5 @@ public class PortfolioLanguages {
     private String rating;
 
     @Column(nullable = false)
-    private Date acquisitionDate;
+    private Date awardDate;
 }

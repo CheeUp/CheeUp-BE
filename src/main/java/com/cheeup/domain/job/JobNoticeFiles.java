@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.job;
 
 import com.cheeup.domain.enums.FileType;
 import jakarta.persistence.*;

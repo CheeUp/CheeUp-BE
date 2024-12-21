@@ -1,29 +1,26 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioPersonalInfos {
+public class PortfolioLanguages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 10)
-    private String name;
-
-    @Column(nullable = false, length = 50)
-    private String email;
+    @Column(nullable = false, length = 255)
+    private String title;
 
     @Column(nullable = false, length = 255)
-    private String githubUrl;
+    private String rating;
 
-    @Column(nullable = false, length = 255)
-    private String blogUrl;
-
-    private String introduction;
+    @Column(nullable = false)
+    private Date acquisitionDate;
 }

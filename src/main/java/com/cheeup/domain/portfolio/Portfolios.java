@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,26 +13,28 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioProjects {
+@EntityListeners(AuditingEntityListener.class)
+public class Portfolios {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(nullable = false, length = 255)
-    private String outline;
+    @Column(nullable = false)
+    private Integer type;
 
     @Column(nullable = false)
-    private String role;
+    private Integer order;
 
-    @Column(nullable = false)
-    private String description;
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private String result;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    private String githubUrl;
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
 }

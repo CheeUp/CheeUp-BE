@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import com.cheeup.domain.enums.TrainingStatus;
 import jakarta.persistence.*;

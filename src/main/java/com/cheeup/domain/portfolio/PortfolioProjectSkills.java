@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

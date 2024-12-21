@@ -1,6 +1,6 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.SkillLevel;
+import com.cheeup.domain.enums.DisabilityType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,12 +9,19 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioSkills {
+public class PortfolioDisabilities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SkillLevel level;
+    private DisabilityType type;
+
+    @Column(nullable = false)
+    private Integer grade;
+
+    @Column(nullable = false)
+    private Integer description;
 }
+

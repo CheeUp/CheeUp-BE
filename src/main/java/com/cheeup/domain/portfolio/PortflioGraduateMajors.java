@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import com.cheeup.domain.enums.MajorTime;
 import com.cheeup.domain.enums.MajorType;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioUniversityMajors {
+public class PortflioGraduateMajors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,6 +30,5 @@ public class PortfolioUniversityMajors {
 
     @Column(nullable = false, precision = 3, scale = 2)
     private BigDecimal maxGrade;
-
 }
 

@@ -1,6 +1,9 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
-import com.cheeup.domain.enums.*;
+import com.cheeup.domain.enums.GraduateDegree;
+import com.cheeup.domain.enums.UniversityCampus;
+import com.cheeup.domain.enums.UniversityEntry;
+import com.cheeup.domain.enums.UniversityStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,33 +14,37 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioMilitaries {
+public class PortfolioGraduates {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private MilitaryType type;
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(nullable = false, length = 20)
+    private String region;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryBranch branch;
+    private GraduateDegree degree;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitarySpecialty specialty;
+    private UniversityCampus campus;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryRank rank;
+    private UniversityEntry entry;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MilitaryDischarge discharge;
+    private UniversityStatus status;
 
     @Column(nullable = false)
     private Date startDate;
 
+    @Column(nullable = false)
     private Date endDate;
 }

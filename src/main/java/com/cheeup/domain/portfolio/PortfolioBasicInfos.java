@@ -1,24 +1,27 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class JobNoticeScraps {
+public class PortfolioBasicInfos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
+    private Integer status;
+
+    @Column(nullable = false, length = 50)
+    private String title;
+
+    @Column(nullable = false)
+    private Integer type;
+
 }

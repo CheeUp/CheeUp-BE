@@ -1,27 +1,27 @@
-package com.cheeup.domain;
+package com.cheeup.domain.portfolio;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.Date;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PortfolioBasicInfos {
-
+public class PortfolioAwards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer status;
-
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 255)
     private String title;
 
+    @Column(nullable = false, length = 255)
+    private String rating;
+
     @Column(nullable = false)
-    private Integer type;
+    private Date acquisitionDate;
 
 }
