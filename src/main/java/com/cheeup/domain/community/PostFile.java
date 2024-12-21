@@ -21,6 +21,10 @@ public class PostFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Post post;
+
     @Column(nullable = false, length = 255)
     private String name;
 

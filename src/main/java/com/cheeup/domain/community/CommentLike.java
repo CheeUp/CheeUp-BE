@@ -1,5 +1,6 @@
 package com.cheeup.domain.community;
 
+import com.cheeup.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +20,14 @@ public class CommentLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "comment_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Comment comment;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
