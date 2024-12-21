@@ -13,12 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class JobNoticeLikes {
+@Table(name = "job_notice_likes")
+public class JobNoticeLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 }
