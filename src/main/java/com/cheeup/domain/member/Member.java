@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.member;
 
 import com.cheeup.domain.enums.MemberRole;
 import jakarta.persistence.*;
@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Members {
+@Table(name = "member")
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,9 +48,11 @@ public class Members {
     private Boolean isActivated = true;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;

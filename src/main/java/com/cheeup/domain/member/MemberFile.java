@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class MemberFiles {
+@Table(name = "member_files")
+public class MemberFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +28,11 @@ public class MemberFiles {
     private String url;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
