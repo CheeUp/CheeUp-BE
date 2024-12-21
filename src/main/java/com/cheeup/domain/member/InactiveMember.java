@@ -1,6 +1,6 @@
 package com.cheeup.domain.member;
 
-import com.cheeup.domain.enums.FileType;
+import com.cheeup.domain.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,25 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "member_files")
-public class MemberFile {
-
+@Table(name = "inactive_members")
+public class InactiveMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, length = 255)
-    private String name;
-
-    @Column(nullable = false, length = 255)
-    private String url;
-
-    @Column(nullable = false)
-    private Integer size;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private FileType type;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -44,5 +30,5 @@ public class MemberFile {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
-}
 
+}

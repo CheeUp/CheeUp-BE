@@ -31,7 +31,7 @@ public class Member {
     @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String nickname;
 
     @Column(nullable = false, length = 20)
@@ -44,7 +44,7 @@ public class Member {
     @Column(length = 225)
     private String profileImageUrl;
 
-    @Column(nullable = false, length = 225)
+    @Column(nullable = false)
     private Boolean isActivated = true;
 
     @CreatedDate
@@ -58,3 +58,4 @@ public class Member {
     private LocalDateTime deletedAt;
 
 }
+
