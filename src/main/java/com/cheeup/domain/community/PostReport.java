@@ -1,5 +1,6 @@
-package com.cheeup.domain;
+package com.cheeup.domain.community;
 
+import com.cheeup.domain.enums.ReportStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,27 +15,24 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Comments {
+@Table(name = "post)reports")
+public class PostReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String content;
+    @Column(nullable = false, length = 255)
+    private String reason;
 
     @Column(nullable = false)
-    private Integer likeCount = 0;
-
-    @Column(nullable = false)
-    private Integer parentId;
+    @Enumerated(EnumType.STRING)
+    private ReportStatus status = ReportStatus.PENDING;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    private LocalDateTime deletedAt;
 }
-
-

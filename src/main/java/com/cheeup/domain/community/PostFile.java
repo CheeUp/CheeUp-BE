@@ -1,5 +1,6 @@
-package com.cheeup.domain;
+package com.cheeup.domain.community;
 
+import com.cheeup.domain.enums.FileType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,27 +15,31 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class PostFiles {
+@Table(name = "post_files")
+public class PostFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 255)
-    private String originFileName;
-
-    @Column(nullable = false, length = 255)
-    private String fileSize;
+    private String name;
 
     @Column(nullable = false)
-    private Integer fileType;
+    private String size;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private FileType type;
 
     @Column(nullable = false, length = 255)
     private String url;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;

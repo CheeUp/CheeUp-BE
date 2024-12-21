@@ -1,4 +1,4 @@
-package com.cheeup.domain;
+package com.cheeup.domain.community;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class PostScraps {
-
+@Table(name = "favorite_boards")
+public class FavoriteBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 }

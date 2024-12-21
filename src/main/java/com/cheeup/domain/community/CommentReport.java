@@ -1,8 +1,8 @@
-package com.cheeup.domain;
+package com.cheeup.domain.community;
 
+import com.cheeup.domain.enums.ReportStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,32 +15,24 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Posts {
-
+@Table(name = "comment_reports")
+public class CommentReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 255)
-    private String title;
+    private String reason;
 
     @Column(nullable = false)
-    private String content;
-
-    private Integer like = 0;
-
-    private Integer scrap = 0;
-
-    private Integer hit = 0;
-
-    @Column(nullable = false)
-    private Boolean isAnonymous;
+    @Enumerated(EnumType.STRING)
+    private ReportStatus status = ReportStatus.PENDING;
 
     @CreatedDate
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    private LocalDateTime deletedAt;
 }
