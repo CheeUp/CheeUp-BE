@@ -1,5 +1,6 @@
 package com.cheeup.domain.common;
 
+import com.cheeup.domain.job.JobDescriptionSkill;
 import com.cheeup.domain.member.MemberSkill;
 import com.cheeup.domain.portfolio.PortfolioProjectSkill;
 import com.cheeup.domain.portfolio.PortfolioSkill;
@@ -31,5 +32,8 @@ public class Skill {
 
     @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
     private List<PortfolioProjectSkill> portfolioProjectSkillList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+    private List<JobDescriptionSkill> jobDescriptionSkills = new ArrayList<>();
 }
 

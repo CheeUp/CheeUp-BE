@@ -4,6 +4,9 @@ import com.cheeup.domain.enums.JobDescriptionType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -14,6 +17,10 @@ public class JobDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_notice_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private JobNotice jobNotice;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -32,4 +39,7 @@ public class JobDescription {
     private String requirement;
 
     private String preferredRequirement;
+
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL)
+    private List<JobDescriptionSkill> jobDescriptionSkills = new ArrayList<>();
 }

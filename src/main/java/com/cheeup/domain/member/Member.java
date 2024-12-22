@@ -3,6 +3,9 @@ package com.cheeup.domain.member;
 import com.cheeup.domain.community.*;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
+import com.cheeup.domain.job.JobNotice;
+import com.cheeup.domain.job.JobNoticeLike;
+import com.cheeup.domain.job.JobNoticeScrap;
 import com.cheeup.domain.portfolio.Portfolio;
 import com.cheeup.domain.portfolio.PortfolioFeedback;
 import com.cheeup.domain.portfolio.PortfolioFeedbackLike;
@@ -114,5 +117,14 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<PortfolioFeedbackLike> portfolioFeedbackLikeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<JobNotice> jobNoticeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<JobNoticeLike> jobNoticeLikeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<JobNoticeScrap> jobNoticeScrapList = new ArrayList<>();
 }
 
