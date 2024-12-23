@@ -1,17 +1,32 @@
 package com.cheeup.domain.job;
 
 import com.cheeup.domain.member.Member;
-import com.cheeup.domain.portfolio.Portfolio;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +34,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "jot_notices")
+@Table(name = "job_notices")
 public class JobNotice {
 
     @Id
@@ -39,25 +54,25 @@ public class JobNotice {
     @Column(nullable = false, length = 30)
     private String position;
 
-    private Integer companySize;
+    private Short companySize;
 
     @Column(nullable = false, length = 255)
     private String url;
 
     @Column(nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
-    @Column(nullable = false)
-    private Integer like = 0;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer likes;
 
-    @Column(nullable = false)
-    private Integer scrap = 0;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer scraps;
 
-    @Column(nullable = false)
-    private Integer hit = 0;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer hits;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)

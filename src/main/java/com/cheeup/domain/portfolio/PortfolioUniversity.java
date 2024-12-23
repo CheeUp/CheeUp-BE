@@ -4,10 +4,29 @@ import com.cheeup.domain.enums.UniversityCampus;
 import com.cheeup.domain.enums.UniversityEntry;
 import com.cheeup.domain.enums.UniversityStatus;
 import com.cheeup.domain.enums.UniversityType;
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.Date;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -48,9 +67,12 @@ public class PortfolioUniversity {
     private UniversityStatus status;
 
     @Column(nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
-    private Date endDate;
+    private LocalDate endDate;
 
-    private Date leaveDate;
+    private LocalDate leaveDate;
+
+    @OneToMany(mappedBy = "portfolioUniversity", cascade = CascadeType.ALL)
+    private List<PortfolioUniversityMajor> portfolioUniversityMajorList = new ArrayList<>();
 }

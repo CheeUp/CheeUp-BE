@@ -1,6 +1,13 @@
 package com.cheeup.domain.member;
 
-import com.cheeup.domain.community.*;
+import com.cheeup.domain.community.Comment;
+import com.cheeup.domain.community.CommentLike;
+import com.cheeup.domain.community.CommentReport;
+import com.cheeup.domain.community.FavoriteBoard;
+import com.cheeup.domain.community.Post;
+import com.cheeup.domain.community.PostLike;
+import com.cheeup.domain.community.PostReport;
+import com.cheeup.domain.community.PostScrap;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
 import com.cheeup.domain.job.JobNotice;
@@ -9,15 +16,28 @@ import com.cheeup.domain.job.JobNoticeScrap;
 import com.cheeup.domain.portfolio.Portfolio;
 import com.cheeup.domain.portfolio.PortfolioFeedback;
 import com.cheeup.domain.portfolio.PortfolioFeedbackLike;
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -25,7 +45,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "member")
+@Table(name = "members")
 public class Member {
 
     @Id
@@ -49,7 +69,7 @@ public class Member {
     private MemberRole role = MemberRole.GUEST;
 
     @Column(length = 225)
-    private String githubLink;
+    private String githubUrl;
 
     @Column(length = 225)
     private String profileImageUrl;
@@ -57,8 +77,8 @@ public class Member {
     @Column(nullable = false)
     private Boolean isActivated = true;
 
-    @Column(nullable = false)
-    private Integer experience = 0;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer experience;
 
     @Enumerated(EnumType.STRING)
     private Tier tier = Tier.BRONZE;
