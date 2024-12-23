@@ -39,7 +39,7 @@ public class PortfolioVeteran {
     private String relation;
 
     @Column(length = 20)
-    private Short number;
+    private String number;
 
-    private Integer ratio;
+    private Short ratio;
 }
