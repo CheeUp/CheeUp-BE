@@ -88,11 +88,5 @@ public class JobNotice {
     private List<JobNoticeFile> jobNoticeFileList = new ArrayList<>();
 
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeLike> jobNoticeLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeScrap> jobNoticeScrapList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
     private List<JobDescription> jobDescriptionList = new ArrayList<>();
 }

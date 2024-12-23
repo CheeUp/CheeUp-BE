@@ -1,21 +1,10 @@
 package com.cheeup.domain.member;
 
-import com.cheeup.domain.community.Comment;
-import com.cheeup.domain.community.CommentLike;
-import com.cheeup.domain.community.CommentReport;
 import com.cheeup.domain.community.FavoriteBoard;
 import com.cheeup.domain.community.Post;
-import com.cheeup.domain.community.PostLike;
-import com.cheeup.domain.community.PostReport;
-import com.cheeup.domain.community.PostScrap;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
-import com.cheeup.domain.job.JobNotice;
-import com.cheeup.domain.job.JobNoticeLike;
-import com.cheeup.domain.job.JobNoticeScrap;
 import com.cheeup.domain.portfolio.Portfolio;
-import com.cheeup.domain.portfolio.PortfolioFeedback;
-import com.cheeup.domain.portfolio.PortfolioFeedbackLike;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -94,15 +83,6 @@ public class Member {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberActivity> memberActivityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberSkill> memberSkillList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<InactiveMember> inactiveMemberList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberFile> memberFileList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -112,39 +92,7 @@ public class Member {
     private List<Post> postList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<PostLike> postLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<PostScrap> postScrapList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<PostReport> postReportList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Comment> commentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<CommentLike> commentLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<CommentReport> commentReportList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Portfolio> portfolioList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<PortfolioFeedback> portfolioFeedbackList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<PortfolioFeedbackLike> portfolioFeedbackLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<JobNotice> jobNoticeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<JobNoticeLike> jobNoticeLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<JobNoticeScrap> jobNoticeScrapList = new ArrayList<>();
 }
 

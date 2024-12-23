@@ -1,7 +1,6 @@
 package com.cheeup.domain.community;
 
 import com.cheeup.domain.member.Member;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -69,12 +68,6 @@ public class Comment {
 
     @OneToMany(mappedBy = "comment")
     private List<Comment> commentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-    private List<CommentLike> commentLikeList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-    private List<CommentReport> commentReportList = new ArrayList<>();
 }
 
 

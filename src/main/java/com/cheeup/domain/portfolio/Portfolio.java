@@ -68,48 +68,4 @@ public class Portfolio {
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
     private List<PortfolioSkill> portfolioSkillList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioAuthor> portfolioAuthorList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioCertificate> portfolioCertificateList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioLanguage> portfolioLanguageList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioAward> portfolioAwardList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioThesis> portfolioThesisList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioProject> portfolioProjectList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioHighSchool> portfolioHighSchoolList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioUniversity> portfolioUniversityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioGraduate> portfolioGraduateList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioCareer> portfolioCareerList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioDisability> portfolioDisabilityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioMilitary> portfolioMilitaryList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioTraining> portfolioTrainingList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioVeteran> portfolioVeteranList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioFeedback> portfolioFeedbackList = new ArrayList<>();
 }
