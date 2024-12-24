@@ -66,7 +66,7 @@ public class Comment {
 
     private LocalDateTime deletedAt;
 
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "parentComment")
     private List<Comment> childCommentList = new ArrayList<>();
 }
 
