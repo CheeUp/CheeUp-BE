@@ -1,0 +1,13 @@
+services:
+  cheeup-db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./db/master/initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: cheeup
+      POSTGRES_PASSWORD: cheeup
+      POSTGRES_DB: cheeup
