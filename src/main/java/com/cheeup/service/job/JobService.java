@@ -1,5 +1,7 @@
 package com.cheeup.service.job;
 
-public interface JobService {
+import com.cheeup.web.dto.JoinJobNoticeDTO;
 
+public interface JobService {
+    void join(JoinJobNoticeDTO.RequestDTO joinDTO);
 }

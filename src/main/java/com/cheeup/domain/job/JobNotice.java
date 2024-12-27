@@ -51,8 +51,8 @@ public class JobNotice {
     @Column(nullable = false, length = 30)
     private String company;
 
-    @Column(nullable = false, length = 30)
-    private String position;
+    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
+    private List<JobNoticeJob> position = new ArrayList<>();
 
     private Short companySize;
 
