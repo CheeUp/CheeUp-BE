@@ -18,7 +18,7 @@ public class JobNoticeRestController {
     @PostMapping("/job-notice")
     public ApiResponseDTO<PostJobNoticeDto.ResponseDto> joinJobNotice(
             @Valid @RequestBody PostJobNoticeDto.RequestDto requestDto) {
-        jobService.join(requestDto);
+        jobService.createJoinNotice(requestDto);
         return ApiResponseDTO.onSuccess(JobNoticeConverter.toResponseDto());
     }
 }

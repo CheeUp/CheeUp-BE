@@ -35,7 +35,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     @Transactional
-    public void join(RequestDto joinDto) {
+    public void createJoinNotice(RequestDto joinDto) {
         //TODO 관리자가 등록하는 건지 확인하는 로직
 
         //종료 날짜가 시작 날짜보다 뒤에 있도록
