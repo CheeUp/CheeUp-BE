@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
-public record JoinJobNoticeDto() {
+public record PostJobNoticeDto() {
     public record RequestDto(
             @Size(max = 30, message = "공고 제목은 30자 미만으로 작성해야 합니다.")
             String title,
