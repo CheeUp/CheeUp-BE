@@ -2,21 +2,12 @@ package com.cheeup.web.dto.community.board;
 
 import com.cheeup.domain.enums.BoardCategory;
 import lombok.Builder;
-import lombok.Getter;
 
-public class BoardDto {
-    @Getter
-    public static class Request {
-        private String name;
-        private Boolean isAnonymous;
-        private BoardCategory category;
+public record BoardDto() {
+    public record RequestDto(String name, Boolean isAnonymous, BoardCategory category) {
     }
 
     @Builder
-    public static class Response {
-        private Long id;
-        private String name;
-        private Boolean isAnonymous;
-        private BoardCategory category;
+    public record ResponseDto(Long id, String name, Boolean isAnonymous, BoardCategory category) {
     }
 }
