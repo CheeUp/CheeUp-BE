@@ -42,7 +42,7 @@ public class JobNotice {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @Column(length = 30)
@@ -65,7 +65,7 @@ public class JobNotice {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer likes;
 
     @Column(columnDefinition = "INTEGER DEFAULT 0")

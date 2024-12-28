@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class JobDescriptionConverter {
     public static JobDescription toJobDescription(JobNoticeDto.JobDescriptionDto jobDescriptionDTO) {
         JobDescriptionType jobDescriptionType = null;
-        switch (jobDescriptionDTO.description()) {
+        switch (jobDescriptionDTO.type()) {
             case "신입":
                 jobDescriptionType = JobDescriptionType.신입;
                 break;

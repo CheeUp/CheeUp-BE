@@ -58,4 +58,9 @@ public class JobDescription {
 
     @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL)
     private List<JobDescriptionSkill> jobDescriptionSkills;
+
+    public void setJobNotice(JobNotice jobNotice) {
+        this.jobNotice = jobNotice;
+        jobNotice.getJobDescriptionList().add(this);
+    }
 }
