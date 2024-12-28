@@ -38,4 +38,14 @@ public class JobNoticeJob {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_notice_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private JobNotice jobNotice;
+
+
+    public void setJobNotice(JobNotice jobNotice) {
+        if (this.jobNotice != null) {
+            jobNotice.getJobNoticeJobList().remove(jobNotice);
+        }
+        this.jobNotice = jobNotice;
+        jobNotice.getJobNoticeJobList().add(this);
+    }
+
 }

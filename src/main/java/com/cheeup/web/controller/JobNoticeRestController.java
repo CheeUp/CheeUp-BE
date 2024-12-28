@@ -1,9 +1,9 @@
 package com.cheeup.web.controller;
 
 import com.cheeup.apiPayload.ApiResponseDTO;
-import com.cheeup.apiPayload.code.status.SuccessStatus;
 import com.cheeup.service.job.JobService;
-import com.cheeup.web.dto.JoinJobNoticeDTO;
+import com.cheeup.web.dto.job.JoinJobNoticeDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +15,9 @@ public class JobNoticeRestController {
     private final JobService jobService;
 
     @PostMapping("/job-notice")
-    public ApiResponseDTO joinJobNotice(
-            @RequestBody JoinJobNoticeDTO.RequestDTO requestDTO) {
-        jobService.join(requestDTO);
-        return ApiResponseDTO.of(SuccessStatus._JOB_APPLIY, null);
+    public ApiResponseDTO joinJobNotice(@Valid @RequestBody JoinJobNoticeDto.RequestDto requestDto) {
+        jobService.join(requestDto);
+        return ApiResponseDTO.onSuccess(null);
     }
 }
 
