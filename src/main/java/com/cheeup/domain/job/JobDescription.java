@@ -1,11 +1,27 @@
 package com.cheeup.domain.job;
 
 import com.cheeup.domain.enums.JobDescriptionType;
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.ArrayList;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -41,5 +57,10 @@ public class JobDescription {
     private String preferredRequirement;
 
     @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL)
-    private List<JobDescriptionSkill> jobDescriptionSkills = new ArrayList<>();
+    private List<JobDescriptionSkill> jobDescriptionSkills;
+
+    public void setJobNotice(JobNotice jobNotice) {
+        this.jobNotice = jobNotice;
+        jobNotice.getJobDescriptionList().add(this);
+    }
 }

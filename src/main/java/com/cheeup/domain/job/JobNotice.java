@@ -51,10 +51,10 @@ public class JobNotice {
     @Column(nullable = false, length = 30)
     private String company;
 
-    @Column(nullable = false, length = 30)
-    private String position;
+    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
+    private List<JobNoticeJob> position = new ArrayList<>();
 
-    private Short companySize;
+    private Integer companySize;
 
     @Column(nullable = false, length = 255)
     private String url;
@@ -65,13 +65,13 @@ public class JobNotice {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer likes;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer scraps;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer hits;
 
     @CreatedDate
@@ -85,8 +85,11 @@ public class JobNotice {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeFile> jobNoticeFileList = new ArrayList<>();
+    private List<JobNoticeFile> jobNoticeFileList;
 
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobDescription> jobDescriptionList = new ArrayList<>();
+    private List<JobDescription> jobDescriptionList;
+
+    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
+    private List<JobNoticeJob> jobNoticeJobList;
 }
