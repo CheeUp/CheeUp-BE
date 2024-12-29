@@ -1,10 +1,8 @@
 package com.cheeup.web.controller.member;
 
 import com.cheeup.apiPayload.ApiResponseDTO;
-import com.cheeup.converter.MemberConverter;
-import com.cheeup.domain.member.MemberInfo;
-import com.cheeup.service.member.MemberUseCase;
-import com.cheeup.web.dto.MemberDTO;
+import com.cheeup.service.member.MemberService;
+import com.cheeup.web.dto.ReadMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberUseCase memberUseCase;
-    private final MemberConverter memberConverter;
+    private final MemberService memberService;
 
     // 인증 인가 구현 되기 전까지 path variable 로 개발
     @GetMapping("/{id}")
-    public ApiResponseDTO<MemberDTO.ResponseDTO> getMemberInfo(@PathVariable Long id){
-        MemberInfo memberInfo = memberUseCase.getMemberInfo(id);
+    public ApiResponseDTO<ReadMemberDto.Response> getMemberInfo(@PathVariable long id){
+
+        ReadMemberDto.Response memberInfo = memberService.getMemberInfo(id);
 
         return ApiResponseDTO.onSuccess(
-                memberConverter.toResponseDTO(memberInfo)
+                memberInfo
         );
     }
 }
