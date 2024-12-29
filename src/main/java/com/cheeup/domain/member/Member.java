@@ -53,7 +53,11 @@ public class Member {
     @Column(nullable = false, length = 20, unique = true)
     private String nickname;
 
-    @Column(nullable = false, length = 20)
+    //기수 컬럼: "SSAFY 12기", "SSAFY 11기"
+    @Column(length = 20)
+    private String groups;
+
+    @Column( length = 20)
     @Enumerated(EnumType.STRING)
     private MemberRole role = MemberRole.GUEST;
 
@@ -63,21 +67,21 @@ public class Member {
     @Column(length = 225)
     private String profileImageUrl;
 
-    @Column(nullable = false)
+    @Column
     private Boolean isActivated = true;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
-    private Integer experience;
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
+    private Integer experience = 0;
 
     @Enumerated(EnumType.STRING)
     private Tier tier = Tier.BRONZE;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
