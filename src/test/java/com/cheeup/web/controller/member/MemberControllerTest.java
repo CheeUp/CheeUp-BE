@@ -1,7 +1,7 @@
 package com.cheeup.web.controller.member;
 
-import com.cheeup.converter.MemberConverterImpl;
-import com.cheeup.service.member.MemberUseCase;
+import com.cheeup.converter.member.MemberConverterImpl;
+import com.cheeup.service.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class MemberControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private MemberUseCase memberUseCase;
+    private MemberService memberService;
 
     @Test
     @DisplayName("올바른 memberId 요청 테스트 - 성공")
@@ -32,7 +32,7 @@ class MemberControllerTest {
         mockMvc.perform(get("/member/"+memberId))
                 .andExpect(status().isOk());
 
-        then(memberUseCase).should()
+        then(memberService).should()
                 .getMemberInfo(memberId);
     }
 
