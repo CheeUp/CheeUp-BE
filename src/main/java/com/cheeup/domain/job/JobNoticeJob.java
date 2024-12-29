@@ -1,8 +1,9 @@
 package com.cheeup.domain.job;
 
-import com.cheeup.domain.common.Skill;
+import com.cheeup.domain.common.Job;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -16,31 +17,35 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name = "job_description_skills")
-public class JobDescriptionSkill {
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "job_notice_jobs")
+public class JobNoticeJob {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_description_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private JobDescription jobDescription;
+    @JoinColumn(name = "job_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Job job;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "skill_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Skill skill;
+    @JoinColumn(name = "job_notice_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private JobNotice jobNotice;
 
-    public void setJobDescription(JobDescription jobDescription) {
-        if (this.jobDescription != null) {
-            jobDescription.getJobDescriptionSkills().remove(jobDescription);
+
+    public void setJobNotice(JobNotice jobNotice) {
+        if (this.jobNotice != null) {
+            jobNotice.getJobNoticeJobList().remove(jobNotice);
         }
-        this.jobDescription = jobDescription;
-        jobDescription.getJobDescriptionSkills().add(this);
+        this.jobNotice = jobNotice;
+        jobNotice.getJobNoticeJobList().add(this);
     }
+
 }

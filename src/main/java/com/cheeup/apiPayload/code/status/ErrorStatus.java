@@ -10,10 +10,13 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorStatus implements BaseErrorCode {
     _INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "COMMON500", "서버 에러, 관리자에게 문의 바랍니다."),
-    _BAD_REQUEST(HttpStatus.BAD_REQUEST,"COMMON400","잘못된 요청입니다."),
-    _UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"COMMON401","인증이 필요합니다."),
+    _BAD_REQUEST(HttpStatus.BAD_REQUEST, "COMMON400", "잘못된 요청입니다."),
+    _UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "COMMON401", "인증이 필요합니다."),
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
-    ;
+    _ENDDATE_IS_BEFORE_STARTDATE(HttpStatus.BAD_REQUEST, "JOB4001", "시작 날짜가 종료 날짜 이후입니다."),
+    _JOB_DESCRIPTION_TYPE_NOTFOUND(HttpStatus.BAD_REQUEST, "JOB4002", "존재하지 않는 채용 형태입니다."),
+    _SKILL_NOTFOUND(HttpStatus.BAD_REQUEST, "JOB4003", "존재하지 않는 기술입니다."),
+    _JOB_NOTFOUND(HttpStatus.BAD_REQUEST, "JOB4004", "존재하지 않는 직무입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
@@ -21,11 +24,20 @@ public enum ErrorStatus implements BaseErrorCode {
 
     @Override
     public ErrorReasonDTO getReason() {
-        return null;
+        return ErrorReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .build();
     }
 
     @Override
     public ErrorReasonDTO getReasonHttpStatus() {
-        return null;
+        return ErrorReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .httpStatus(httpStatus)
+                .build();
     }
 }

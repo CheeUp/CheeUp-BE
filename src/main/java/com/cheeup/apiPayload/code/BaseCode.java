@@ -1,6 +1,7 @@
 package com.cheeup.apiPayload.code;
 
 public interface BaseCode {
-    public ErrorReasonDTO getReason();
-    public ErrorReasonDTO getReasonHttpStatus();
+    public ReasonDTO getReason();
+
+    public ReasonDTO getReasonHttpStatus();
 }

@@ -1,7 +1,7 @@
 package com.cheeup.apiPayload.code.status;
 
 import com.cheeup.apiPayload.code.BaseCode;
-import com.cheeup.apiPayload.code.ErrorReasonDTO;
+import com.cheeup.apiPayload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -9,19 +9,29 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
-    _OK(HttpStatus.OK, "COMMON200", "성공입니다.");
+    _OK(HttpStatus.OK, "COMMON200", "성공입니다."),
+    _JOB_APPLIY(HttpStatus.OK, "JOB2001", "취업 공고 등록에 성공하였습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
 
     @Override
-    public ErrorReasonDTO getReason() {
-        return null;
+    public ReasonDTO getReason() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(true)
+                .build();
     }
 
     @Override
-    public ErrorReasonDTO getReasonHttpStatus() {
-        return null;
+    public ReasonDTO getReasonHttpStatus() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(true)
+                .httpStatus(httpStatus)
+                .build();
     }
 }
