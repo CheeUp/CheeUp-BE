@@ -10,13 +10,11 @@ import com.cheeup.repository.member.MemberSkillRepository;
 import com.cheeup.web.dto.ReadMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
@@ -25,10 +23,10 @@ public class MemberServiceImpl implements MemberService {
     private final MemberConverter memberConverter;
 
     @Override
-    @Transactional
     public ReadMemberDto.Response getMemberInfo(long id) {
 
         Member findMember = memberRepository.findById(id);
+
         List<MemberSkill> memberSkill = memberSkillRepository.findAllByMember(findMember);
         List<MemberPreferredJob> preferredJobs = memberPreferredJobRepository.findAllByMember(findMember);
 
@@ -49,5 +47,4 @@ public class MemberServiceImpl implements MemberService {
                 MemberPreferredJob::getJobName
         ).toList();
     }
-    
 }
