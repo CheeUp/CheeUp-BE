@@ -78,7 +78,7 @@ class MemberServiceImplTest {
     @Test
     @DisplayName("올바른 값 -> 성공")
     void getMemberInfo() {
-        given(memberRepository.findById(1L)).willReturn(member);
+        given(memberRepository.findById(1L).orElseThrow()).willReturn(member);
         given(memberSkillRepository.findAllByMember(member)).willReturn(List.of(memberSkill));
         given(memberPreferredJobRepository.findAllByMember(member)).willReturn(List.of(memberPreferredJob));
 

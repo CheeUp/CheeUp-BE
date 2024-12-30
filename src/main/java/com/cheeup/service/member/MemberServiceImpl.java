@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public ReadMemberDto.Response getMemberInfo(long id) {
 
-        Member findMember = memberRepository.findById(id);
+        Member findMember = memberRepository.findById(id).orElseThrow();
 
         List<MemberSkill> memberSkill = memberSkillRepository.findAllByMember(findMember);
         List<MemberPreferredJob> preferredJobs = memberPreferredJobRepository.findAllByMember(findMember);

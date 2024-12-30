@@ -36,7 +36,7 @@ class MemberPreferredJobRepositoryTest {
     @Test
     @DisplayName("회원 선호 직업 조회")
     void findAllByMember() {
-        Member findMember = memberRepository.findById((long) member.getId());
+        Member findMember = memberRepository.findById((long) member.getId()).orElseThrow();
 
         List<MemberPreferredJob> preferredJobList = memberPreferredJobRepository.findAllByMember(findMember);
 
