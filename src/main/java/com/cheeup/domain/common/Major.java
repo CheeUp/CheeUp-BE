@@ -29,7 +29,7 @@ public class Major {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

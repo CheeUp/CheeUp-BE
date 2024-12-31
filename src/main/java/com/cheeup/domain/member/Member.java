@@ -24,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -55,7 +56,8 @@ public class Member {
 
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private MemberRole role = MemberRole.GUEST;
+    @ColumnDefault("'GUEST'")
+    private MemberRole role;
 
     @Column(length = 225)
     private String githubUrl;
@@ -64,13 +66,15 @@ public class Member {
     private String profileImageUrl;
 
     @Column(nullable = false)
-    private Boolean isActivated = true;
+    @ColumnDefault("true")
+    private Boolean isActivated;
 
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
     private Integer experience;
 
     @Enumerated(EnumType.STRING)
-    private Tier tier = Tier.BRONZE;
+    @ColumnDefault("'BRONZE'")
+    private Tier tier;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)

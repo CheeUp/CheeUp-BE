@@ -19,7 +19,7 @@ public class JobDescriptionConverter {
         return JobDescription.builder()
                 .title(jobDescriptionDTO.title())
                 .type(jobDescriptionType)
-                .location(jobDescriptionDTO.location())
+                //.location(jobDescriptionDTO.location())
                 .description(jobDescriptionDTO.description())
                 .requirement(jobDescriptionDTO.requirement())
                 .preferredRequirement(jobDescriptionDTO.preferredRequirement())

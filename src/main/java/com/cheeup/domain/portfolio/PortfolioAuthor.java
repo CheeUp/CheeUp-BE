@@ -32,7 +32,7 @@ public class PortfolioAuthor {
     @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Portfolio portfolio;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 20)
     private String name;
 
     @Column(nullable = false, length = 50)
@@ -40,10 +40,10 @@ public class PortfolioAuthor {
 
     private String introduction;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String githubUrl;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String blogUrl;
 
 }

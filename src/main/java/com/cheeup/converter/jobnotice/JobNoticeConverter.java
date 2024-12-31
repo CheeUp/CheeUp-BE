@@ -10,7 +10,7 @@ public class JobNoticeConverter {
         return JobNotice.builder()
                 .title(joinDto.title())
                 .company(joinDto.company())
-                .companySize(joinDto.companySize())
+                //.companySize(joinDto.companySize())
                 .url(joinDto.url())
                 .startDate(joinDto.startDate())
                 .endDate(joinDto.endDate())

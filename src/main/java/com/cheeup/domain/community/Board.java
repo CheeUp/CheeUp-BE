@@ -1,16 +1,18 @@
 package com.cheeup.domain.community;
 
+import com.cheeup.domain.enums.BoardCategory;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,10 +41,13 @@ public class Board {
     @Column(nullable = false)
     private Boolean isAnonymous;
 
+    @Enumerated(EnumType.STRING)
+    private BoardCategory boardCategory;
+
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<Post> postList = new ArrayList<>();
+    private List<Post> postList;
 }

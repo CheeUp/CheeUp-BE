@@ -35,9 +35,8 @@ public class PortfolioDisability {
     @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Portfolio portfolio;
 
-
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean isEligibility;
 
     @Enumerated(EnumType.STRING)
     private DisabilityType type;

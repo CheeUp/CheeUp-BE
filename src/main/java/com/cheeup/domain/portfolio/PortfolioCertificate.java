@@ -37,7 +37,7 @@ public class PortfolioCertificate {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, length = 30)
+    @Column(length = 30)
     private String grade;
 
     @Column(nullable = false)

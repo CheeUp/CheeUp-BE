@@ -1,11 +1,14 @@
 package com.cheeup.domain.jobnotice;
 
+import com.cheeup.domain.enums.CompanySize;
 import com.cheeup.domain.member.Member;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +20,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -51,10 +53,8 @@ public class JobNotice {
     @Column(nullable = false, length = 30)
     private String company;
 
-    @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeJob> position = new ArrayList<>();
-
-    private Integer companySize;
+    @Enumerated(EnumType.STRING)
+    private CompanySize companySize;
 
     @Column(nullable = false, length = 255)
     private String url;

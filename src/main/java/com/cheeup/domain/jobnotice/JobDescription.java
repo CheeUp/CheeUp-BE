@@ -45,8 +45,8 @@ public class JobDescription {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, length = 50)
-    private String location;
+    @Column(length = 50)
+    private String region;
 
     @Column(nullable = false)
     private String description;
