@@ -17,13 +17,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -59,7 +59,8 @@ public class Member {
 
     @Column( length = 20)
     @Enumerated(EnumType.STRING)
-    private MemberRole role = MemberRole.GUEST;
+    @ColumnDefault("'GUEST'")
+    private MemberRole role;
 
     @Column(length = 225)
     private String githubUrl;
@@ -67,14 +68,16 @@ public class Member {
     @Column(length = 225)
     private String profileImageUrl;
 
-    @Column
-    private Boolean isActivated = true;
+    @Column(nullable = false)
+    @ColumnDefault("true")
+    private Boolean isActivated;
 
     @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer experience = 0;
 
     @Enumerated(EnumType.STRING)
-    private Tier tier = Tier.BRONZE;
+    @ColumnDefault("'BRONZE'")
+    private Tier tier;
 
     @CreatedDate
     @Column(updatable = false)
@@ -87,16 +90,16 @@ public class Member {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberFile> memberFileList = new ArrayList<>();
+    private List<MemberFile> memberFileList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<FavoriteBoard> favoriteBoardList = new ArrayList<>();
+    private List<FavoriteBoard> favoriteBoardList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Post> postList = new ArrayList<>();
+    private List<Post> postList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Portfolio> portfolioList = new ArrayList<>();
+    private List<Portfolio> portfolioList;
 
 }
 

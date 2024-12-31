@@ -1,9 +1,12 @@
-package com.cheeup.domain.portfolio;
+package com.cheeup.domain.jobnotice;
 
+import com.cheeup.domain.enums.JobDescriptionType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -25,37 +28,39 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name = "portfolio_projects")
-public class PortfolioProject {
+@Table(name = "job_descriptions")
+public class JobDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Portfolio portfolio;
-
-    @Column(nullable = false, length = 255)
-    private String title;
-
-    @Column(nullable = false, length = 255)
-    private String outline;
+    @JoinColumn(name = "job_notice_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private JobNotice jobNotice;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private JobDescriptionType type;
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(length = 50)
+    private String region;
 
     @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
-    private String result;
+    private String requirement;
 
-    @Column(nullable = false, length = 255)
-    private String githubUrl;
+    private String preferredRequirement;
 
-    @OneToMany(mappedBy = "portfolioProject", cascade = CascadeType.ALL)
-    private List<PortfolioProjectSkill> portfolioProjectSkillList;
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL)
+    private List<JobDescriptionSkill> jobDescriptionSkills;
 
-    @OneToMany(mappedBy = "portfolioProject", cascade = CascadeType.ALL)
-    private List<PortfolioProjectFile> portfolioProjectFileList;
+    public void setJobNotice(JobNotice jobNotice) {
+        this.jobNotice = jobNotice;
+        jobNotice.getJobDescriptionList().add(this);
+    }
 }

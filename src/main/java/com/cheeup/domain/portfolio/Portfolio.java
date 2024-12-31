@@ -17,13 +17,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -53,7 +53,8 @@ public class Portfolio {
     private String title;
 
     @Column(nullable = false)
-    private Boolean open = false;
+    @ColumnDefault("false")
+    private Boolean open;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -66,6 +67,6 @@ public class Portfolio {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioSkill> portfolioSkillList = new ArrayList<>();
+    private List<PortfolioSkill> portfolioSkillList;
 
 }
