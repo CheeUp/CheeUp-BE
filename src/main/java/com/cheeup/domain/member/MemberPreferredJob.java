@@ -1,5 +1,6 @@
 package com.cheeup.domain.member;
 
+import com.cheeup.domain.common.Job;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -39,7 +40,9 @@ public class MemberPreferredJob {
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
-    private String jobName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Job job;
 
     @CreatedDate
     @Column(updatable = false)
