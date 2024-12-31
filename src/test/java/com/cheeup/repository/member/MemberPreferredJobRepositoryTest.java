@@ -1,5 +1,6 @@
 package com.cheeup.repository.member;
 
+import com.cheeup.domain.common.Job;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.member.Member;
 import com.cheeup.domain.member.MemberPreferredJob;
@@ -36,7 +37,7 @@ class MemberPreferredJobRepositoryTest {
     @Test
     @DisplayName("회원 선호 직업 조회")
     void findAllByMember() {
-        Member findMember = memberRepository.findById((long) member.getId()).orElseThrow();
+        Member findMember = memberRepository.findById(member.getId()).orElseThrow();
 
         List<MemberPreferredJob> preferredJobList = memberPreferredJobRepository.findAllByMember(findMember);
 
@@ -66,7 +67,10 @@ class MemberPreferredJobRepositoryTest {
         jobNmList.forEach(
                 nm -> preferList.add(
                         MemberPreferredJob.builder()
-                                .jobName(nm)
+                                .job(Job.builder()
+                                        .id(1L)
+                                        .name("백엔드")
+                                        .build())
                                 .member(member)
                                 .build()
                 )
