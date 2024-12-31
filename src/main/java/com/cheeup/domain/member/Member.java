@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -87,16 +86,16 @@ public class Member {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberFile> memberFileList = new ArrayList<>();
+    private List<MemberFile> memberFileList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<FavoriteBoard> favoriteBoardList = new ArrayList<>();
+    private List<FavoriteBoard> favoriteBoardList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Post> postList = new ArrayList<>();
+    private List<Post> postList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Portfolio> portfolioList = new ArrayList<>();
+    private List<Portfolio> portfolioList;
 
 }
 
