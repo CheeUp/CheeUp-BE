@@ -2,26 +2,42 @@ package com.cheeup.web.dto.jobnotice;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public record JobNoticeDto() {
 
-    public record PositionDto(
+    public record JobDto(
+            @NotNull
+            @Positive
             Long id,
+
+            @NotBlank
+
             String name) {
     }
 
     public record ImageDto(
+            @NotBlank
             String name,
+
+            @NotNull
+            @PositiveOrZero
             Integer size,
+
+            @NotBlank
             String type,
+
+            @NotBlank
             String url
     ) {
     }
 
 
     public record JobDescriptionDto(
+            @NotBlank
             @Size(max = 100, message = "직무 이름은 100자 미만으로 작성해야 합니다.")
             String title,
             String type,
