@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -55,8 +54,8 @@ public class PortfolioProject {
     private String githubUrl;
 
     @OneToMany(mappedBy = "portfolioProject", cascade = CascadeType.ALL)
-    private List<PortfolioProjectSkill> portfolioProjectSkillList = new ArrayList<>();
+    private List<PortfolioProjectSkill> portfolioProjectSkillList;
 
     @OneToMany(mappedBy = "portfolioProject", cascade = CascadeType.ALL)
-    private List<PortfolioProjectFile> portfolioProjectFileList = new ArrayList<>();
+    private List<PortfolioProjectFile> portfolioProjectFileList;
 }
