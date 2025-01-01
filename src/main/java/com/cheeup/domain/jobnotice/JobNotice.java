@@ -87,22 +87,16 @@ public class JobNotice {
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
     private List<JobNoticeFile> jobNoticeFileList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
     private List<JobDescription> jobDescriptionList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
     private List<JobNoticeJob> jobNoticeJobList = new ArrayList<>();
 
-
-    public void setJobNoticeJobList(List<JobNoticeJob> jobNoticeJobList) {
-        this.jobNoticeJobList = jobNoticeJobList;
-    }
-
-    public void addJobDescription(JobDescription jobDescription) {
-        this.jobDescriptionList.add(jobDescription);
-        jobDescription.setJobNotice(this); // 자식 엔티티에 부모 설정
-    }
 }
