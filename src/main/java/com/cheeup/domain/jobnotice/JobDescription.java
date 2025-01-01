@@ -60,6 +60,7 @@ public class JobDescription {
     private List<JobDescriptionSkill> jobDescriptionSkills;
 
     public void setJobNotice(JobNotice jobNotice) {
+        System.out.println(jobNotice.toString());
         this.jobNotice = jobNotice;
         jobNotice.getJobDescriptionList().add(this);
     }

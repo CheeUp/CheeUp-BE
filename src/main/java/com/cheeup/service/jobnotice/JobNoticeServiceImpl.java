@@ -5,9 +5,6 @@ import com.cheeup.apiPayload.exception.handler.JobException;
 import com.cheeup.converter.jobnotice.JobDescriptionMapper;
 import com.cheeup.converter.jobnotice.JobNoticeMapper;
 import com.cheeup.domain.common.Job;
-import com.cheeup.domain.common.Skill;
-import com.cheeup.domain.jobnotice.JobDescription;
-import com.cheeup.domain.jobnotice.JobDescriptionSkill;
 import com.cheeup.domain.jobnotice.JobNotice;
 import com.cheeup.domain.jobnotice.JobNoticeJob;
 import com.cheeup.repository.common.JobRepository;
@@ -37,37 +34,18 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         // 채용공고 테이블 엔티티 생성
         JobNotice jobNotice = jobNoticeMapper.toEntity(requestDto);
 
-        // 채용공고 직무 설정 및 직무 이름으로 직무 조회 후 직무에 채용공고 설정
-        List<JobNoticeJob> jobNoticeJobList = requestDto.jobList().stream()
+        List<JobNoticeJob> jobNoticeJobList = requestDto.jobs().stream()
                 .map(jobDto -> {
-                    Job job = jobRepository.findById(jobDto.id())
-                            .orElseThrow(() -> new JobException(JobErrorCode.JOB_NOT_FOUND));
+                    Job job = jobRepository.findByIdAndName(jobDto.id(), jobDto.name())
+                            .orElseThrow(() -> new JobException(
+                                    JobErrorCode.JOB_NOT_FOUND));
                     return JobNoticeJob.builder()
                             .job(job)
                             .jobNotice(jobNotice)
                             .build();
                 }).toList();
-        // jobNotice.setJobNoticeJobList(jobNoticeJobList);
 
-        List<JobDescription> jobDescriptionList = requestDto.jobDescriptionList().stream()
-                .map(jobDescriptionDto -> {
-                    JobDescription jobDescription = jobDescriptionMapper.toEntity(jobDescriptionDto);
-                    jobDescription.setJobNotice(jobNotice);
-
-                    List<JobDescriptionSkill> jobDescriptionSkills = jobDescriptionDto.skills().stream()
-                            .map(skillDto -> {
-                                Skill skill = skillRepository.findById(skillDto.id()).orElseThrow();
-                                return JobDescriptionSkill.builder()
-                                        .skill(skill)
-                                        .jobDescription(jobDescription)
-                                        .build();
-                            }).toList();
-
-                    //jobDescription.setJobDescriptionSkills(jobDescriptionSkills);
-                    return jobDescription;
-                }).toList();
-
-        // jobNotice.setJobDescriptionList(jobDescriptionList)
+        jobNotice.setJobNoticeJobList(jobNoticeJobList);
 
         jobNoticeRepository.save(jobNotice);
     }

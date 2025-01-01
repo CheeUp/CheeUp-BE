@@ -33,11 +33,11 @@ public record PostJobNoticeDto() {
             LocalDate endDate,
 
             @NotEmpty
-            List<JobNoticeDto.JobDto> jobList,
+            List<JobNoticeDto.JobDto> jobs,
 
-            List<JobNoticeDto.ImageDto> imageList,
+            List<JobNoticeDto.ImageDto> images,
 
-            List<JobNoticeDto.JobDescriptionDto> jobDescriptionList
+            List<JobNoticeDto.JobDescriptionDto> jobDescriptions
 
     ) {
 
