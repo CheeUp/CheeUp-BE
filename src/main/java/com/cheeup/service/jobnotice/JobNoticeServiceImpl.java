@@ -1,10 +1,15 @@
 package com.cheeup.service.jobnotice;
 
 import com.cheeup.apiPayload.code.error.codes.JobErrorCode;
+import com.cheeup.apiPayload.code.error.codes.SkillErrorCode;
 import com.cheeup.apiPayload.exception.handler.JobException;
+import com.cheeup.apiPayload.exception.handler.SkillException;
 import com.cheeup.converter.jobnotice.JobDescriptionMapper;
 import com.cheeup.converter.jobnotice.JobNoticeMapper;
 import com.cheeup.domain.common.Job;
+import com.cheeup.domain.common.Skill;
+import com.cheeup.domain.jobnotice.JobDescription;
+import com.cheeup.domain.jobnotice.JobDescriptionSkill;
 import com.cheeup.domain.jobnotice.JobNotice;
 import com.cheeup.domain.jobnotice.JobNoticeJob;
 import com.cheeup.repository.common.JobRepository;
@@ -39,13 +44,34 @@ public class JobNoticeServiceImpl implements JobNoticeService {
                     Job job = jobRepository.findByIdAndName(jobDto.id(), jobDto.name())
                             .orElseThrow(() -> new JobException(
                                     JobErrorCode.JOB_NOT_FOUND));
-                    return JobNoticeJob.builder()
-                            .job(job)
-                            .jobNotice(jobNotice)
-                            .build();
+
+                    JobNoticeJob jobNoticeJob = JobNoticeJob.builder().build();
+                    jobNoticeJob.setJobNotice(jobNotice);
+                    jobNoticeJob.setJob(job);
+
+                    return jobNoticeJob;
                 }).toList();
 
-        jobNotice.setJobNoticeJobList(jobNoticeJobList);
+        List<JobDescription> jobDescriptionList = requestDto.jobDescriptions().stream()
+                .map(jobDescriptionDto -> {
+                    JobDescription jobDescription = jobDescriptionMapper.toEntity(jobDescriptionDto);
+
+                    List<JobDescriptionSkill> jobDescriptionSkillList = jobDescriptionDto.skills().stream()
+                            .map(skillDto -> {
+                                Skill skill = skillRepository.findById(skillDto.id())
+                                        .orElseThrow(() -> new SkillException(SkillErrorCode.SKILL_NOT_FOUND));
+
+                                JobDescriptionSkill jobDescriptionSkill = JobDescriptionSkill.builder().build();
+                                jobDescriptionSkill.setJobDescription(jobDescription);
+                                jobDescriptionSkill.setSkill(skill);
+
+                                return jobDescriptionSkill;
+                            }).toList();
+
+                    jobDescription.setJobNotice(jobNotice);
+
+                    return jobDescription;
+                }).toList();
 
         jobNoticeRepository.save(jobNotice);
     }
