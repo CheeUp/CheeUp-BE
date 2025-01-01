@@ -68,7 +68,7 @@ public class Member {
     @Column(length = 225)
     private String profileImageUrl;
 
-    @Column(nullable = false)
+    @Column
     @ColumnDefault("true")
     private Boolean isActivated;
 

@@ -1,11 +1,13 @@
 package com.cheeup.web.controller.member;
 
-import com.cheeup.apiPayload.ApiResponseDTO;
+import com.cheeup.apiPayload.ApiResponse;
+import com.cheeup.apiPayload.code.success.codes.MemberSuccessCode;
 import com.cheeup.service.member.MemberService;
 import com.cheeup.web.dto.ReadMemberDto;
 import com.cheeup.web.dto.UpdateMemberDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,22 +24,23 @@ public class MemberController {
 
     // 인증 인가 구현 되기 전까지 path variable 로 개발
     @GetMapping("/{id}")
-    public ApiResponseDTO<ReadMemberDto.Response> getMemberInfo(@PathVariable long id){
-
+    public ResponseEntity<ApiResponse<ReadMemberDto.Response>> getMemberInfo(@PathVariable long id){
         ReadMemberDto.Response memberInfo = memberService.getMemberInfo(id);
 
-        return ApiResponseDTO.onSuccess(
-                memberInfo
-        );
+        return ResponseEntity
+                .status(MemberSuccessCode.MEMBER_READ.getHttpStatus())
+                .body(ApiResponse.onSuccess(MemberSuccessCode.MEMBER_READ, memberInfo));
     }
 
     @PutMapping("/{id}")
-    public ApiResponseDTO<UpdateMemberDto.Response> updateMemberInfo(
+    public ResponseEntity<ApiResponse<Void>> updateMemberInfo(
             @PathVariable long id,
             @Valid @RequestBody UpdateMemberDto.Request request
     ) {
         memberService.updateMemberInfo(id, request);
 
-        return ApiResponseDTO.onSuccess(null);
+        return ResponseEntity
+                .status(MemberSuccessCode.MEMBER_UPDATE.getHttpStatus())
+                .body(ApiResponse.onSuccess(MemberSuccessCode.MEMBER_UPDATE, null));
     }
 }
