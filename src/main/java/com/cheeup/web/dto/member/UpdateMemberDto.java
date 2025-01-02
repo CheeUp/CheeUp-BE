@@ -1,4 +1,4 @@
-package com.cheeup.web.dto;
+package com.cheeup.web.dto.member;
 
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
@@ -18,16 +18,11 @@ public class UpdateMemberDto {
         @Size(max=20)
         String group,
 
-        @Size(max=225)
+        @Size(max=255)
         String profileImage,
 
         List<Long> skills,
         List<Long> preferredJobs
     ){}
-
-    @Builder
-    public record Response (
-
-    ) {}
 
 }

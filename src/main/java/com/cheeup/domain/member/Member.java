@@ -62,10 +62,10 @@ public class Member {
     @ColumnDefault("'GUEST'")
     private MemberRole role;
 
-    @Column(length = 225)
+    @Column
     private String githubUrl;
 
-    @Column(length = 225)
+    @Column
     private String profileImageUrl;
 
     @Column
@@ -73,7 +73,7 @@ public class Member {
     private Boolean isActivated;
 
     @Column(columnDefinition = "INTEGER DEFAULT 0")
-    private Integer experience = 0;
+    private Integer experience;
 
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'BRONZE'")

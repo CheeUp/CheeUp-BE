@@ -4,6 +4,7 @@ import com.cheeup.domain.common.Job;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.member.Member;
 import com.cheeup.domain.member.MemberPreferredJob;
+import com.cheeup.repository.common.JobRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,9 @@ class MemberPreferredJobRepositoryTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
 
     private Member member;
 
@@ -64,13 +68,12 @@ class MemberPreferredJobRepositoryTest {
         List<String> jobNmList = List.of("백엔드", "프론트", "인프라");
         List<MemberPreferredJob> preferList = new ArrayList<>();
 
+        Job job = jobRepository.findById(1L).orElse(null);
+
         jobNmList.forEach(
                 nm -> preferList.add(
                         MemberPreferredJob.builder()
-                                .job(Job.builder()
-                                        .id(1L)
-                                        .name("백엔드")
-                                        .build())
+                                .job(job)
                                 .member(member)
                                 .build()
                 )

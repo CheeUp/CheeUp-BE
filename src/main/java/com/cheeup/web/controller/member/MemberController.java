@@ -3,8 +3,8 @@ package com.cheeup.web.controller.member;
 import com.cheeup.apiPayload.ApiResponse;
 import com.cheeup.apiPayload.code.success.codes.MemberSuccessCode;
 import com.cheeup.service.member.MemberService;
-import com.cheeup.web.dto.ReadMemberDto;
-import com.cheeup.web.dto.UpdateMemberDto;
+import com.cheeup.web.dto.member.ReadMemberDto;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +24,8 @@ public class MemberController {
 
     // 인증 인가 구현 되기 전까지 path variable 로 개발
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ReadMemberDto.Response>> getMemberInfo(@PathVariable long id){
-        ReadMemberDto.Response memberInfo = memberService.getMemberInfo(id);
+    public ResponseEntity<ApiResponse<ReadMemberDto.ResponseDto>> getMemberInfo(@PathVariable long id){
+        ReadMemberDto.ResponseDto memberInfo = memberService.getMemberInfo(id);
 
         return ResponseEntity
                 .status(MemberSuccessCode.MEMBER_READ.getHttpStatus())

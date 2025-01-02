@@ -6,7 +6,7 @@ import com.cheeup.apiPayload.code.error.codes.SkillErrorCode;
 import com.cheeup.apiPayload.exception.handler.JobException;
 import com.cheeup.apiPayload.exception.handler.MemberException;
 import com.cheeup.apiPayload.exception.handler.SkillException;
-import com.cheeup.converter.member.MemberConverter;
+import com.cheeup.converter.member.MemberMapper;
 import com.cheeup.domain.common.Job;
 import com.cheeup.domain.common.Skill;
 import com.cheeup.domain.member.Member;
@@ -17,8 +17,8 @@ import com.cheeup.repository.common.SkillRepository;
 import com.cheeup.repository.member.MemberPreferredJobRepository;
 import com.cheeup.repository.member.MemberRepository;
 import com.cheeup.repository.member.MemberSkillRepository;
-import com.cheeup.web.dto.ReadMemberDto;
-import com.cheeup.web.dto.UpdateMemberDto;
+import com.cheeup.web.dto.member.ReadMemberDto;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +32,12 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberSkillRepository memberSkillRepository;
     private final MemberPreferredJobRepository memberPreferredJobRepository;
-    private final MemberConverter memberConverter;
+    private final MemberMapper memberMapper;
     private final SkillRepository skillRepository;
     private final JobRepository jobRepository;
 
     @Override
-    public ReadMemberDto.Response getMemberInfo(long id) {
+    public ReadMemberDto.ResponseDto getMemberInfo(long id) {
         Member findMember = memberRepository.findById(id).orElseThrow(
                 () -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
         );
@@ -48,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
         List<String> memberSkillList = extractMemberSkillList(memberSkill);
         List<String> preferredJobList = extractMemberPreferredJobList(preferredJobs);
 
-        ReadMemberDto.Response response = memberConverter.toResponse(findMember, memberSkillList, preferredJobList);
+        ReadMemberDto.ResponseDto response = memberMapper.toDto(findMember, memberSkillList, preferredJobList);
 
         return response;
     }
@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
                 () -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
         );
 
-        Member pendingMemberInfo = memberConverter.toUpdatedEntity(request, findMember);
+        Member pendingMemberInfo = memberMapper.toUpdatedEntity(request, findMember);
         memberRepository.save(pendingMemberInfo);
 
         clearMemberSkills(findMember);

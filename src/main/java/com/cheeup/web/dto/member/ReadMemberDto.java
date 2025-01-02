@@ -1,4 +1,4 @@
-package com.cheeup.web.dto;
+package com.cheeup.web.dto.member;
 
 import lombok.Builder;
 
@@ -7,7 +7,7 @@ import java.util.List;
 public class ReadMemberDto {
 
     @Builder
-    public record Response(
+    public record ResponseDto(
             String nickname,
             String email,
             String groups,

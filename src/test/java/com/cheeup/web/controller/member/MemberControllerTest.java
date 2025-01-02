@@ -2,7 +2,7 @@ package com.cheeup.web.controller.member;
 
 import com.cheeup.converter.member.MemberConverterImpl;
 import com.cheeup.service.member.MemberService;
-import com.cheeup.web.dto.UpdateMemberDto;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.cheeup.converter.member;
 
 import com.cheeup.domain.member.Member;
-import com.cheeup.web.dto.ReadMemberDto;
-import com.cheeup.web.dto.UpdateMemberDto;
+import com.cheeup.web.dto.member.ReadMemberDto;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -10,10 +10,10 @@ import org.mapstruct.MappingTarget;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface MemberConverter {
+public interface MemberMapper {
 
     @Mapping(target="profileImage", source ="member.profileImageUrl")
-    ReadMemberDto.Response toResponse(Member member, List<String> skills, List<String> preferredJobs);
+    ReadMemberDto.ResponseDto toDto(Member member, List<String> skills, List<String> preferredJobs);
 
     Member toUpdatedEntity(UpdateMemberDto.Request request, @MappingTarget Member member);
 }

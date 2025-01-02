@@ -1,6 +1,6 @@
 package com.cheeup.service.member;
 
-import com.cheeup.converter.member.MemberConverter;
+import com.cheeup.converter.member.MemberMapper;
 import com.cheeup.converter.member.MemberConverterImpl;
 import com.cheeup.domain.common.Job;
 import com.cheeup.domain.common.Skill;
@@ -13,8 +13,8 @@ import com.cheeup.repository.common.SkillRepository;
 import com.cheeup.repository.member.MemberPreferredJobRepository;
 import com.cheeup.repository.member.MemberRepository;
 import com.cheeup.repository.member.MemberSkillRepository;
-import com.cheeup.web.dto.ReadMemberDto;
-import com.cheeup.web.dto.UpdateMemberDto;
+import com.cheeup.web.dto.member.ReadMemberDto;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,12 +53,12 @@ class MemberServiceImplTest {
     MemberServiceImpl memberServiceImpl;
 
     @Spy
-    private MemberConverter memberConverter = new MemberConverterImpl();
+    private MemberMapper memberMapper = new MemberConverterImpl();
 
     private Member member;
     private MemberSkill memberSkill;
     private MemberPreferredJob memberPreferredJob;
-    private ReadMemberDto.Response response;
+    private ReadMemberDto.ResponseDto response;
     private Skill skill;
     private Job job;
 
@@ -83,7 +83,7 @@ class MemberServiceImplTest {
                 .job(job)
                 .build();
 
-        response = memberConverter.toResponse(
+        response = memberMapper.toDto(
                 member,
                 List.of("자바"),
                 List.of("백엔드")
@@ -98,7 +98,7 @@ class MemberServiceImplTest {
         given(memberSkillRepository.findAllByMember(member)).willReturn(List.of(memberSkill));
         given(memberPreferredJobRepository.findAllByMember(member)).willReturn(List.of(memberPreferredJob));
 
-        ReadMemberDto.Response memberInfo = memberServiceImpl.getMemberInfo(1L);
+        ReadMemberDto.ResponseDto memberInfo = memberServiceImpl.getMemberInfo(1L);
         Assertions.assertThat(memberInfo).isEqualTo(response);
 
         then(memberSkillRepository).should().findAllByMember(member);
