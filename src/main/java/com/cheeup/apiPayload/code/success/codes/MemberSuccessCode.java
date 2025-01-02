@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum MemberSuccessCode implements SuccessCode {
     MEMBER_READ(HttpStatus.OK, "MEMBER2001", "회원 조회에 성공했습니다."),
-    MEMBER_UPDATE(HttpStatus.OK, "MEMBER2001", "회원 수정에 성공했습니다.");
+    MEMBER_UPDATE(HttpStatus.OK, "MEMBER2001", "회원 수정에 성공했습니다."),
+    MEMBER_CREATE(HttpStatus.CREATED, "MEMBER2003", "회원 생성에 성공했습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
