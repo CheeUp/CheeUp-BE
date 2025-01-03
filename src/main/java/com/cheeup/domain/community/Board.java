@@ -1,7 +1,7 @@
 package com.cheeup.domain.community;
 
 import com.cheeup.domain.enums.BoardCategory;
-import com.cheeup.web.dto.community.board.BoardDto;
+import com.cheeup.web.dto.community.BoardDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +43,6 @@ public class Board {
     @Column(nullable = false)
     private Boolean isAnonymous;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BoardCategory category;
 
@@ -51,6 +50,7 @@ public class Board {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Post> postList = new ArrayList<>();
 
