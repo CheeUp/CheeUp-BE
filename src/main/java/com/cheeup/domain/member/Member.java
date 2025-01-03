@@ -5,6 +5,7 @@ import com.cheeup.domain.community.Post;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
 import com.cheeup.domain.portfolio.Portfolio;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +19,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -101,5 +104,13 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Portfolio> portfolioList;
 
+    public Member updateMember(UpdateMemberDto.Request request) {
+        Optional.ofNullable(request.nickname()).ifPresent(nickname -> this.nickname = nickname);
+        Optional.ofNullable(request.email()).ifPresent(email -> this.email = email);
+        Optional.ofNullable(request.group()).ifPresent(group -> this.groups = group);
+        Optional.ofNullable(request.profileImage()).ifPresent(profileImage -> this.profileImageUrl = profileImage);
+
+        return this;
+    }
 }
 

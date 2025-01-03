@@ -59,17 +59,20 @@ public class MemberServiceImpl implements MemberService {
         Member findMember = memberRepository.findById(id).orElseThrow(
                 () -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
         );
-
-        Member pendingMemberInfo = memberMapper.toUpdatedEntity(request, findMember);
-        memberRepository.save(pendingMemberInfo);
+        Member updateMember = findMember.updateMember(request);
+        memberRepository.save(updateMember);
 
         clearMemberSkills(findMember);
-        List<MemberSkill> memberSkillList = mapMemberSkillsFromRequest(request, findMember);
-        memberSkillRepository.saveAll(memberSkillList);
+        if(request.skills() != null) {
+            List<MemberSkill> memberSkillList = mapMemberSkillsFromRequest(request, findMember);
+            memberSkillRepository.saveAll(memberSkillList);
+        }
 
         clearMemberPreferredJobs(findMember);
-        List<MemberPreferredJob> memberPreferredJobList = mapMemberPreferredJobsFromRequest(request, findMember);
-        memberPreferredJobRepository.saveAll(memberPreferredJobList);
+        if(request.preferredJobs() != null) {
+            List<MemberPreferredJob> memberPreferredJobList = mapMemberPreferredJobsFromRequest(request, findMember);
+            memberPreferredJobRepository.saveAll(memberPreferredJobList);
+        }
     }
 
     private List<MemberSkill> mapMemberSkillsFromRequest(UpdateMemberDto.Request request, Member member) {
