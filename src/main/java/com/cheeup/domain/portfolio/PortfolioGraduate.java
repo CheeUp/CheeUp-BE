@@ -21,6 +21,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -77,6 +78,7 @@ public class PortfolioGraduate {
 
     private LocalDate leaveDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "portfolioGraduate", cascade = CascadeType.ALL)
-    private List<PortfolioGraduateMajor> portfolioGraduateMajorList;
+    private List<PortfolioGraduateMajor> portfolioGraduateMajorList = new ArrayList<>();
 }

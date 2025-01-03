@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -65,8 +66,9 @@ public class Comment {
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "parentComment")
-    private List<Comment> childCommentList;
+    private List<Comment> childCommentList = new ArrayList<>();
 }
 
 

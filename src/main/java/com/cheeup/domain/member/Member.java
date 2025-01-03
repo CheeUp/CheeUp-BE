@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,17 +93,21 @@ public class Member {
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberFile> memberFileList;
+    private List<MemberFile> memberFileList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<FavoriteBoard> favoriteBoardList;
+    private List<FavoriteBoard> favoriteBoardList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Post> postList;
+    private List<Post> postList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Portfolio> portfolioList;
+    private List<Portfolio> portfolioList = new ArrayList<>();
 
     public Member updateMember(UpdateMemberDto.Request request) {
         Optional.ofNullable(request.nickname()).ifPresent(nickname -> this.nickname = nickname);

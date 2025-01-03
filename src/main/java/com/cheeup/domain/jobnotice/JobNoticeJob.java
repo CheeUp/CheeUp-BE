@@ -44,10 +44,14 @@ public class JobNoticeJob {
 
     public void setJobNotice(JobNotice jobNotice) {
         if (this.jobNotice != null) {
-            jobNotice.getJobNoticeJobList().remove(jobNotice);
+            jobNotice.getJobNoticeJobList().remove(this);
         }
         this.jobNotice = jobNotice;
         jobNotice.getJobNoticeJobList().add(this);
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 
 }

@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -56,10 +57,14 @@ public class JobDescription {
 
     private String preferredRequirement;
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL)
-    private List<JobDescriptionSkill> jobDescriptionSkills;
+    private List<JobDescriptionSkill> jobDescriptionSkills = new ArrayList<>();
 
     public void setJobNotice(JobNotice jobNotice) {
+        if (jobNotice.getJobDescriptionList() != null) {
+            jobNotice.getJobDescriptionList().remove(this);
+        }
         this.jobNotice = jobNotice;
         jobNotice.getJobDescriptionList().add(this);
     }
