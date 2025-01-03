@@ -2,7 +2,7 @@
 name: "\U0001F41B fix"
 about: 버그를 수정합니다.
 title: "\U0001F41B fix: "
-labels: "\U0001F41B fix"
+labels: ''
 assignees: ''
 
 ---

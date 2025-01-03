@@ -2,7 +2,7 @@
 name: "\U0001F528 refactor"
 about: 코드를 리팩터링 합니다.
 title: "\U0001F528 refactor: "
-labels: "\U0001F528 refactor"
+labels: ''
 assignees: ''
 
 ---

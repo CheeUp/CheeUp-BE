@@ -2,7 +2,7 @@
 name: "\U0001F69A chore"
 about: 의존성 관리, 설정 파일 수정 등 기능과 직접 관련 없는 작업을 처리합니다.
 title: "\U0001F69A chore: "
-labels: "\U0001F69A chore"
+labels: ''
 assignees: ''
 
 ---

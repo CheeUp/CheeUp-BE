@@ -2,7 +2,7 @@
 name: "\U0001F4C3 docs"
 about: 문서 관련 작업을 처리합니다.
 title: "\U0001F4C3 docs: "
-labels: "\U0001F4C3 docs"
+labels: ''
 assignees: ''
 
 ---
