@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,7 @@ public class Board {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<Post> postList;
+    private List<Post> postList = new ArrayList<>();
 }
