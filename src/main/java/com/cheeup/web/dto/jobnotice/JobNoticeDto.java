@@ -1,64 +1,45 @@
 package com.cheeup.web.dto.jobnotice;
 
+import com.cheeup.domain.enums.FileType;
+import com.cheeup.domain.enums.JobDescriptionType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public record JobNoticeDto() {
 
-    public record JobDto(
-            @NotNull
-            @Positive
-            Long id,
-
-            @NotBlank
-
-            String name) {
-    }
-
     public record ImageDto(
-            @NotBlank
+            @NotBlank(message = "이미지 이름이 비어 있습니다.")
             String name,
 
-            @NotNull
-            @PositiveOrZero
+            @NotNull(message = "이미지 크기가 비어 있습니다.")
+            @PositiveOrZero(message = "이미지 크기가 음수입니다.")
             Integer size,
 
-            @NotBlank
-            String type,
+            @NotBlank(message = "파일 유형이 비어 있습니다.")
+            FileType type,
 
-            @NotBlank
+            @NotBlank(message = "이미지 링크가 비어 있습니다.")
             String url
     ) {
     }
 
 
     public record JobDescriptionDto(
-            @NotBlank
+            @NotBlank(message = "직무 이름이 비어 있습니다.")
             @Size(max = 100, message = "직무 이름은 100자 미만으로 작성해야 합니다.")
             String title,
-            String type,
+            JobDescriptionType type,
             @Size(max = 50, message = "지역 이름은 50자 미만으로 작성해야 합니다.")
             String location,
             String description,
             String requirement,
             String preferredRequirement,
-            List<SkillDto> skills
+            @NotEmpty(message = "기술 스택이 비어 있습니다.")
+            List<Long> skills
     ) {
     }
-
-    public record SkillDto(
-            @NotNull
-            Long id,
-
-            @NotBlank()
-            @Size()
-            String name
-    ) {
-    }
-
-
 }
