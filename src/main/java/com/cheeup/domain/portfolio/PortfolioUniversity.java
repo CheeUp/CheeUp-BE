@@ -73,6 +73,7 @@ public class PortfolioUniversity {
 
     private LocalDate leaveDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "portfolioUniversity", cascade = CascadeType.ALL)
     private List<PortfolioUniversityMajor> portfolioUniversityMajorList = new ArrayList<>();
 }

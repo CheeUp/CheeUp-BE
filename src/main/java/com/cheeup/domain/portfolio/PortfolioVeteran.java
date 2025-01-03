@@ -31,9 +31,9 @@ public class PortfolioVeteran {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Portfolio portfolio;
-
+    
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean isEligibility;
 
     @Column(length = 20)
     private String relation;

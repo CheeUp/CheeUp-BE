@@ -4,6 +4,7 @@ import com.cheeup.domain.enums.GraduateDegree;
 import com.cheeup.domain.enums.UniversityCampus;
 import com.cheeup.domain.enums.UniversityEntry;
 import com.cheeup.domain.enums.UniversityStatus;
+import com.cheeup.domain.enums.UniversityType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -56,6 +57,10 @@ public class PortfolioGraduate {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    private UniversityType type;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UniversityCampus campus;
 
     @Column(nullable = false)
@@ -73,6 +78,7 @@ public class PortfolioGraduate {
 
     private LocalDate leaveDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "portfolioGraduate", cascade = CascadeType.ALL)
     private List<PortfolioGraduateMajor> portfolioGraduateMajorList = new ArrayList<>();
 }

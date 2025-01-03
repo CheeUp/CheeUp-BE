@@ -1,10 +1,13 @@
 package com.cheeup.web.controller;
 
-import com.cheeup.apiPayload.ApiResponseDTO;
-import com.cheeup.service.BoardService;
-import com.cheeup.web.dto.community.board.BoardDto;
+import com.cheeup.apiPayload.ApiResponse;
+import com.cheeup.apiPayload.code.success.codes.CommunitySuccessCode;
+import com.cheeup.service.community.BoardService;
+import com.cheeup.web.dto.community.BoardDto;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,30 +24,44 @@ public class BoardController {
 
     // 전체 게시판 목록 조회
     @GetMapping("/boards")
-    public ApiResponseDTO<List<BoardDto.ResponseDto>> getBoards() {
-        return ApiResponseDTO.onSuccess(boardService.getBoardList());
+    public ResponseEntity<ApiResponse<List<BoardDto.ResponseDto>>> getBoards() {
+        List<BoardDto.ResponseDto> boardList = boardService.getBoardList();
+        return ResponseEntity
+                .status(CommunitySuccessCode.BOARD_LIST_FETCHED.getHttpStatus())
+                .body(ApiResponse.onSuccess(CommunitySuccessCode.BOARD_LIST_FETCHED, boardList));
     }
+
 
     // 게시판 생성
     //TODO: 관리자 권한 확인
     @PostMapping("/board")
-    public ApiResponseDTO<BoardDto.ResponseDto> createBoard(@RequestBody BoardDto.RequestDto requestDto) {
-        return ApiResponseDTO.onSuccess(boardService.createBoard(requestDto));
+    public ResponseEntity<ApiResponse<Void>> createBoard(@Valid @RequestBody BoardDto.RequestDto requestDto) {
+        boardService.createBoard(requestDto);
+        return ResponseEntity
+                .status(CommunitySuccessCode.BOARD_CREATED.getHttpStatus())
+                .body(ApiResponse.onSuccess(CommunitySuccessCode.BOARD_CREATED, null));
     }
 
     // 게시판 수정
     //TODO: 관리자 권한 확인
     @PutMapping("/board/{boardId}")
-    public ApiResponseDTO<BoardDto.ResponseDto> updateBoard(@RequestBody BoardDto.RequestDto requestDto,
-                                                            @PathVariable Long boardId) {
-        return ApiResponseDTO.onSuccess(boardService.updateBoard(boardId, requestDto));
+    public ResponseEntity<ApiResponse<BoardDto.ResponseDto>> updateBoard(
+            @Valid @RequestBody BoardDto.RequestDto requestDto,
+            @PathVariable Long boardId) {
+        boardService.updateBoard(boardId, requestDto);
+        return ResponseEntity
+                .status(CommunitySuccessCode.BOARD_UPDATED.getHttpStatus())
+                .body(ApiResponse.onSuccess(CommunitySuccessCode.BOARD_UPDATED, null));
     }
+
 
     // 게시판 삭제
     //TODO: 관리자 권한 확인
     @DeleteMapping("/board/{boardId}")
-    public ApiResponseDTO<String> deleteBoard(@PathVariable Long boardId) {
+    public ResponseEntity<ApiResponse<Void>> deleteBoard(@PathVariable Long boardId) {
         boardService.deleteBoard(boardId);
-        return ApiResponseDTO.onSuccess("게시판 삭제 성공");
+        return ResponseEntity
+                .status(CommunitySuccessCode.BOARD_DELETED.getHttpStatus())
+                .body(ApiResponse.onSuccess(CommunitySuccessCode.BOARD_DELETED, null));
     }
 }
