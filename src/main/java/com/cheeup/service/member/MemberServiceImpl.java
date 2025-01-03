@@ -48,9 +48,7 @@ public class MemberServiceImpl implements MemberService {
         List<String> memberSkillList = extractMemberSkillList(memberSkill);
         List<String> preferredJobList = extractMemberPreferredJobList(preferredJobs);
 
-        ReadMemberDto.ResponseDto response = memberMapper.toDto(findMember, memberSkillList, preferredJobList);
-
-        return response;
+        return memberMapper.toDto(findMember, memberSkillList, preferredJobList);
     }
 
     @Override
