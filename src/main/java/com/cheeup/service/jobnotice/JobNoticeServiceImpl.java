@@ -18,7 +18,6 @@ import com.cheeup.repository.jobnotice.JobNoticeRepository;
 import com.cheeup.web.dto.jobnotice.PostJobNoticeDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +28,8 @@ public class JobNoticeServiceImpl implements JobNoticeService {
     private final SkillRepository skillRepository;
     private final JobRepository jobRepository;
     private final JobNoticeRepository jobNoticeRepository;
-    private final JobNoticeMapper jobNoticeMapper = Mappers.getMapper(JobNoticeMapper.class);
-    private final JobDescriptionMapper jobDescriptionMapper = Mappers.getMapper(JobDescriptionMapper.class);
+    private final JobNoticeMapper jobNoticeMapper;
+    private final JobDescriptionMapper jobDescriptionMapper;
 
 
     @Override
