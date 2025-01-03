@@ -2,7 +2,7 @@
 name: "✨ feat"
 about: 새로운 기능을 추가합니다.
 title: "✨ feat: "
-labels: ''
+labels: "✨ feat"
 assignees: minjumost
 
 ---
