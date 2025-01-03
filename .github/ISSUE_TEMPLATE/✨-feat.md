@@ -1,9 +1,9 @@
 ---
-name: Feature request
-about: 필요한 기능을 추가해 주세요
-title: ''
+name: "✨ feat"
+about: 새로운 기능을 추가합니다.
+title: "✨ feat: "
 labels: ''
-assignees: ''
+assignees: minjumost
 
 ---
 
