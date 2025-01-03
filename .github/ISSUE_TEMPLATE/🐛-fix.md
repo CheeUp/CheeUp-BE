@@ -1,8 +1,8 @@
 ---
-name: "✨ feat"
-about: 새로운 기능을 추가합니다.
-title: "✨ feat: "
-labels: "✨ feat, \U0001F41B fix"
+name: "\U0001F41B fix"
+about: 버그를 수정합니다.
+title: "\U0001F41B fix: "
+labels: "\U0001F41B fix"
 assignees: ''
 
 ---
@@ -15,4 +15,3 @@ assignees: ''
 
 ## 👀 ETC
 - 참고자료 등 기타 내용 작성
-

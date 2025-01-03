@@ -1,8 +1,8 @@
 ---
-name: "✨ feat"
-about: 새로운 기능을 추가합니다.
-title: "✨ feat: "
-labels: "✨ feat, \U0001F41B fix"
+name: "\U0001F30F deploy"
+about: 배포 관련 작업을 처리합니다.
+title: "\U0001F30F deploy"
+labels: "\U0001F30F deploy"
 assignees: ''
 
 ---
@@ -15,4 +15,3 @@ assignees: ''
 
 ## 👀 ETC
 - 참고자료 등 기타 내용 작성
-

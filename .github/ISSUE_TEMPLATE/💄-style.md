@@ -1,8 +1,8 @@
 ---
-name: "✨ feat"
-about: 새로운 기능을 추가합니다.
-title: "✨ feat: "
-labels: "✨ feat, \U0001F41B fix"
+name: "\U0001F484 style"
+about: UI/UX 등 스타일 관련 작업을 처리합니다.
+title: "\U0001F484 style: "
+labels: "\U0001F484 style"
 assignees: ''
 
 ---
@@ -15,4 +15,3 @@ assignees: ''
 
 ## 👀 ETC
 - 참고자료 등 기타 내용 작성
-
