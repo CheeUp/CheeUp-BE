@@ -28,6 +28,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -39,6 +40,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "members")
+@DynamicInsert
 public class Member {
 
     @Id
@@ -63,7 +65,7 @@ public class Member {
 
     @Column( length = 20)
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'GUEST'")
+    @ColumnDefault("'guest'")
     private MemberRole role;
 
     @Column
@@ -74,13 +76,13 @@ public class Member {
 
     @Column
     @ColumnDefault("true")
-    private Boolean isActivated;
+    private Boolean isActivated = true;
 
     @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer experience;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'BRONZE'")
+    @ColumnDefault("'bronze'")
     private Tier tier;
 
     @CreatedDate
@@ -114,6 +116,13 @@ public class Member {
         Optional.ofNullable(request.email()).ifPresent(email -> this.email = email);
         Optional.ofNullable(request.group()).ifPresent(group -> this.groups = group);
         Optional.ofNullable(request.profileImage()).ifPresent(profileImage -> this.profileImageUrl = profileImage);
+
+        return this;
+    }
+
+    public Member delete() {
+        this.deletedAt = LocalDateTime.now();
+        this.isActivated = false;
 
         return this;
     }
