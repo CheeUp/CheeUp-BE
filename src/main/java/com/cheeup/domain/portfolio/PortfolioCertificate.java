@@ -40,6 +40,9 @@ public class PortfolioCertificate {
     @Column(length = 30)
     private String grade;
 
+    @Column(nullable = true, length = 50)
+    String organization;
+
     @Column(nullable = false)
     private LocalDate earnedDate;
 }
