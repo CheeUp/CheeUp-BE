@@ -13,4 +13,5 @@ spring:
         format_sql: true
         show_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+jwt:
+  secret: ${JWT_SECRET}
