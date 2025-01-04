@@ -1,8 +1,10 @@
 package com.cheeup.apiPayload.exception;
 
 import com.cheeup.apiPayload.ApiResponse;
-import java.util.HashMap;
+import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -31,14 +33,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+            MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errors.put(error.getField(), error.getDefaultMessage());
-        });
+        Map<String, String> errors = new LinkedHashMap<>();
 
-        return ResponseEntity.badRequest().body(errors);
+        e.getBindingResult().getFieldErrors().stream()
+                .forEach(fieldError -> {
+                    String fieldName = fieldError.getField();
+                    String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+                    errors.merge(fieldName, errorMessage,
+                            (existingErrorMessage, newErrorMessage) -> existingErrorMessage + ", " + newErrorMessage);
+                });
+
+        String errorCode = errors.isEmpty() ? null : errors.values().iterator().next();
+
+        return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, ValidationErrorCode.valueOf(errorCode), request,
+                errors);
+    }
+
+    private ResponseEntity<Object> handleExceptionInternalArgs(Exception e, HttpHeaders headers,
+                                                               ValidationErrorCode validationErrorCode,
+                                                               WebRequest request, Map<String, String> errorArgs) {
+
+        ApiResponse<Object> body = ApiResponse.onFailure(validationErrorCode);
+        return super.handleExceptionInternal(
+                e,
+                body,
+                headers,
+                validationErrorCode.getHttpStatus(),
+                request
+        );
     }
 }
 

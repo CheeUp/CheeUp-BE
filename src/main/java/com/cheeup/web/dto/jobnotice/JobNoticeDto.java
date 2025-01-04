@@ -1,5 +1,6 @@
 package com.cheeup.web.dto.jobnotice;
 
+import com.cheeup.validation.annotation.ExistJobDescriptionType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +31,7 @@ public record JobNoticeDto() {
             @NotBlank(message = "직무 이름이 비어 있습니다.")
             @Size(max = 100, message = "직무 이름은 100자 미만으로 작성해야 합니다.")
             String title,
+            @ExistJobDescriptionType
             String type,
             @Size(max = 50, message = "지역 이름은 50자 미만으로 작성해야 합니다.")
             String location,

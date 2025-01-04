@@ -1,6 +1,7 @@
 package com.cheeup.web.dto.jobnotice;
 
 import com.cheeup.domain.enums.CompanySize;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -35,8 +36,10 @@ public record PostJobNoticeDto() {
             @NotEmpty(message = "채용 포지션이 비어 있습니다.")
             List<Long> jobs,
 
+            @Valid
             List<JobNoticeDto.ImageDto> images,
 
+            @Valid
             List<JobNoticeDto.JobDescriptionDto> jobDescriptions
 
     ) {

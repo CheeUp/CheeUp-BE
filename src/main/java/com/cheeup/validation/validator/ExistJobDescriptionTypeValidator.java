@@ -1,6 +1,5 @@
 package com.cheeup.validation.validator;
 
-import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
 import com.cheeup.domain.enums.JobDescriptionType;
 import com.cheeup.validation.annotation.ExistJobDescriptionType;
 import jakarta.validation.ConstraintValidator;
@@ -22,8 +21,6 @@ public class ExistJobDescriptionTypeValidator implements ConstraintValidator<Exi
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         boolean isValid;
-        System.out.println("==========================================================");
-        System.out.println(value);
         if (value == null) {
             isValid = false;
         } else {
@@ -33,8 +30,7 @@ public class ExistJobDescriptionTypeValidator implements ConstraintValidator<Exi
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(
-                            ValidationErrorCode.NOT_FOUND_JOB_DESCRIPTION_TYPE.getMessage())
+            context.buildConstraintViolationWithTemplate("NOT_FOUND_JOB_DESCRIPTION_TYPE")
                     .addConstraintViolation();
         }
 

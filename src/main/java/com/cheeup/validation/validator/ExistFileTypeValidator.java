@@ -1,6 +1,5 @@
 package com.cheeup.validation.validator;
 
-import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
 import com.cheeup.domain.enums.FileType;
 import com.cheeup.validation.annotation.ExistFileType;
 import jakarta.validation.ConstraintValidator;
@@ -31,7 +30,7 @@ public class ExistFileTypeValidator implements ConstraintValidator<ExistFileType
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ValidationErrorCode.NOT_FOUND_FILE_TYPE.getMessage())
+            context.buildConstraintViolationWithTemplate("NOT_FOUND_FILE_TYPE")
                     .addConstraintViolation();
         }
 
