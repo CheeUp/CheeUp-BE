@@ -71,4 +71,13 @@ public class Portfolio {
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
     private List<PortfolioSkill> portfolioSkillList = new ArrayList<>();
 
+    public void updateMember(Member member) {
+        this.member = member;
+    }
+
+    public void updateJob(Job job) {
+        this.job = job;
+    }
+
+
 }
