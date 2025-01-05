@@ -20,6 +20,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -86,12 +87,16 @@ public class JobNotice {
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeFile> jobNoticeFileList;
+    private List<JobNoticeFile> jobNoticeFileList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobDescription> jobDescriptionList;
+    private List<JobDescription> jobDescriptionList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "jobNotice", cascade = CascadeType.ALL)
-    private List<JobNoticeJob> jobNoticeJobList;
+    private List<JobNoticeJob> jobNoticeJobList = new ArrayList<>();
+
 }

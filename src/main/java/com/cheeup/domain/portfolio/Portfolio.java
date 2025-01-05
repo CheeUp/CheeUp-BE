@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -66,8 +67,9 @@ public class Portfolio {
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioSkill> portfolioSkillList;
+    private List<PortfolioSkill> portfolioSkillList = new ArrayList<>();
 
     public void updateMember(Member member) {
         this.member = member;

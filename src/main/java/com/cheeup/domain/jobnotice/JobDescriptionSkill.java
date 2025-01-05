@@ -38,9 +38,13 @@ public class JobDescriptionSkill {
 
     public void setJobDescription(JobDescription jobDescription) {
         if (this.jobDescription != null) {
-            jobDescription.getJobDescriptionSkills().remove(jobDescription);
+            jobDescription.getJobDescriptionSkills().remove(this);
         }
         this.jobDescription = jobDescription;
         jobDescription.getJobDescriptionSkills().add(this);
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 }

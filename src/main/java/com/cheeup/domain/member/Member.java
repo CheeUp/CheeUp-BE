@@ -5,6 +5,7 @@ import com.cheeup.domain.community.Post;
 import com.cheeup.domain.enums.MemberRole;
 import com.cheeup.domain.enums.Tier;
 import com.cheeup.domain.portfolio.Portfolio;
+import com.cheeup.web.dto.member.UpdateMemberDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +18,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,22 +57,26 @@ public class Member {
     @Column(nullable = false, length = 20, unique = true)
     private String nickname;
 
-    @Column(nullable = false, length = 20)
+    //기수 컬럼: "SSAFY 12기", "SSAFY 11기"
+    @Column(length = 20)
+    private String groups;
+
+    @Column( length = 20)
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'GUEST'")
     private MemberRole role;
 
-    @Column(length = 225)
+    @Column
     private String githubUrl;
 
-    @Column(length = 225)
+    @Column
     private String profileImageUrl;
 
-    @Column(nullable = false)
+    @Column
     @ColumnDefault("true")
     private Boolean isActivated;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer experience;
 
     @Enumerated(EnumType.STRING)
@@ -76,26 +84,38 @@ public class Member {
     private Tier tier;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberFile> memberFileList;
+    private List<MemberFile> memberFileList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<FavoriteBoard> favoriteBoardList;
+    private List<FavoriteBoard> favoriteBoardList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Post> postList;
+    private List<Post> postList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Portfolio> portfolioList;
+    private List<Portfolio> portfolioList = new ArrayList<>();
 
+    public Member updateMember(UpdateMemberDto.Request request) {
+        Optional.ofNullable(request.nickname()).ifPresent(nickname -> this.nickname = nickname);
+        Optional.ofNullable(request.email()).ifPresent(email -> this.email = email);
+        Optional.ofNullable(request.group()).ifPresent(group -> this.groups = group);
+        Optional.ofNullable(request.profileImage()).ifPresent(profileImage -> this.profileImageUrl = profileImage);
+
+        return this;
+    }
 }
 
