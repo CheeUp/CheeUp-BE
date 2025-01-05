@@ -2,13 +2,17 @@ package com.cheeup.apiPayload.exception;
 
 import com.cheeup.apiPayload.ApiResponse;
 import java.util.Objects;
+import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindingResult;n
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +60,40 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
                                                              HttpStatusCode statusCode, WebRequest request) {
         return super.handleExceptionInternal(ex, body, headers, statusCode, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        e.getBindingResult().getFieldErrors().stream()
+                .forEach(fieldError -> {
+                    String fieldName = fieldError.getField();
+                    String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+                    errors.merge(fieldName, errorMessage,
+                            (existingErrorMessage, newErrorMessage) -> existingErrorMessage + ", " + newErrorMessage);
+                });
+
+        String errorCode = errors.isEmpty() ? null : errors.values().iterator().next();
+
+        return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, ValidationErrorCode.valueOf(errorCode), request,
+                errors);
+    }
+
+    private ResponseEntity<Object> handleExceptionInternalArgs(Exception e, HttpHeaders headers,
+                                                               ValidationErrorCode validationErrorCode,
+                                                               WebRequest request, Map<String, String> errorArgs) {
+
+        ApiResponse<Object> body = ApiResponse.onFailure(validationErrorCode);
+        return super.handleExceptionInternal(
+                e,
+                body,
+                headers,
+                validationErrorCode.getHttpStatus(),
+                request
+        );
     }
 }
 
