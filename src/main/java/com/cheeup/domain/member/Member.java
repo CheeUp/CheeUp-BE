@@ -65,7 +65,7 @@ public class Member {
 
     @Column( length = 20)
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'guest'")
+    @ColumnDefault("'GUEST'")
     private MemberRole role;
 
     @Column
@@ -82,7 +82,7 @@ public class Member {
     private Integer experience;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'bronze'")
+    @ColumnDefault("'BRONZE'")
     private Tier tier;
 
     @CreatedDate
