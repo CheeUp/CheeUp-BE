@@ -2,17 +2,14 @@ package com.cheeup.web.dto.jobnotice;
 
 import com.cheeup.domain.enums.CompanySize;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public record PostJobNoticeDto() {
     public record RequestDto(
-            @NotBlank(message = "공고 제목이 비어 있습니다.")
+            @NotBlank
             @Size(max = 30, message = "공고 제목은 30자 미만으로 작성해야 합니다.")
             String title,
 
@@ -34,7 +31,7 @@ public record PostJobNoticeDto() {
             LocalDate endDate,
 
             @NotEmpty(message = "채용 포지션이 비어 있습니다.")
-            List<Long> jobs,
+            List<Long> jobIds,
 
             @Valid
             List<JobNoticeDto.ImageDto> images,

@@ -16,10 +16,11 @@ import com.cheeup.repository.common.JobRepository;
 import com.cheeup.repository.common.SkillRepository;
 import com.cheeup.repository.jobnotice.JobNoticeRepository;
 import com.cheeup.web.dto.jobnotice.PostJobNoticeDto;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         // 채용공고 테이블 엔티티 생성
         JobNotice jobNotice = jobNoticeMapper.toEntity(requestDto);
 
-        List<JobNoticeJob> jobNoticeJobList = requestDto.jobs().stream()
+        List<JobNoticeJob> jobNoticeJobList = requestDto.jobIds().stream()
                 .map(jobId -> {
                     Job job = jobRepository.findById(jobId)
                             .orElseThrow(() -> new JobException(
@@ -55,7 +56,7 @@ public class JobNoticeServiceImpl implements JobNoticeService {
                 .map(jobDescriptionDto -> {
                     JobDescription jobDescription = jobDescriptionMapper.toEntity(jobDescriptionDto);
 
-                    List<JobDescriptionSkill> jobDescriptionSkillList = jobDescriptionDto.skills().stream()
+                    List<JobDescriptionSkill> jobDescriptionSkillList = jobDescriptionDto.skillIds().stream()
                             .map(skillId -> {
                                 Skill skill = skillRepository.findById(skillId)
                                         .orElseThrow(() -> new SkillException(SkillErrorCode.SKILL_NOT_FOUND));
