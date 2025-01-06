@@ -15,11 +15,14 @@ import com.cheeup.domain.jobnotice.JobNoticeJob;
 import com.cheeup.repository.common.JobRepository;
 import com.cheeup.repository.common.SkillRepository;
 import com.cheeup.repository.jobnotice.JobNoticeRepository;
+import com.cheeup.web.dto.jobnotice.GetAllJobNoticesDto;
 import com.cheeup.web.dto.jobnotice.PostJobNoticeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,7 +39,8 @@ public class JobNoticeServiceImpl implements JobNoticeService {
     @Override
     @Transactional
     public void createJobNotice(PostJobNoticeDto.RequestDto requestDto) {
-        // 채용공고 테이블 엔티티 생성
+        //TODO MEMBER에 대한 로직 작성
+
         JobNotice jobNotice = jobNoticeMapper.toEntity(requestDto);
 
         List<JobNoticeJob> jobNoticeJobList = requestDto.jobIds().stream()
@@ -74,5 +78,19 @@ public class JobNoticeServiceImpl implements JobNoticeService {
                 }).toList();
 
         jobNoticeRepository.save(jobNotice);
+    }
+
+    @Override
+    public List<GetAllJobNoticesDto.ResponseDto> readJobNoticeByYearAndMonth(int year, int month) {
+        LocalDate startOfMonth = LocalDate.of(year, month, 1).minusDays(7);
+        LocalDate endOfMonth = LocalDate.of(year, month, 1).withDayOfMonth(
+                LocalDate.of(year, month, 1).lengthOfMonth()).plusDays(7);
+
+        List<JobNotice> jobNoticeList = jobNoticeRepository.findAllByDateRange(startOfMonth, endOfMonth);
+        List<GetAllJobNoticesDto.ResponseDto> result = new ArrayList<>();
+        for (JobNotice jobNotice : jobNoticeList) {
+            result.add(jobNoticeMapper.toResponseDto(jobNotice));
+        }
+        return result;
     }
 }
