@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class PostController {
-	private final PostService postService;
+    private final PostService postService;
 
-	@PostMapping("/post/{boardId}")
-	public ResponseEntity<ApiResponse<Void>> createPost(
-		@Valid @RequestBody CreatePostDto.RequestDto requestDto,
-		@PathVariable Long boardId) {
-		postService.createPost(requestDto);
-		return ResponseEntity
-			.status(CommunitySuccessCode.BOARD_CREATED.getHttpStatus())
-			.body(ApiResponse.onSuccess(CommunitySuccessCode.POST_CREATED, null));
-	}
+    @PostMapping("/post/{boardId}")
+    public ResponseEntity<ApiResponse<Void>> createPost(
+            @Valid @RequestBody CreatePostDto.RequestDto requestDto,
+            @PathVariable Long boardId) {
+        postService.createPost(requestDto);
+        return ResponseEntity
+                .status(CommunitySuccessCode.BOARD_CREATED.getHttpStatus())
+                .body(ApiResponse.onSuccess(CommunitySuccessCode.POST_CREATED, null));
+    }
 }

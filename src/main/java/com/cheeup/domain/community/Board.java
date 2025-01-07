@@ -33,32 +33,32 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "boards")
 public class Board {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false, length = 20, unique = true)
-	private String name;
+    @Column(nullable = false, length = 20, unique = true)
+    private String name;
 
-	@Column(nullable = false)
-	private Boolean isAnonymous;
+    @Column(nullable = false)
+    private Boolean isAnonymous;
 
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private BoardCategory category;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BoardCategory category;
 
-	@CreatedDate
-	@Column(updatable = false, nullable = false)
-	private LocalDateTime createdAt;
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private LocalDateTime createdAt;
 
-	@Builder.Default
-	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-	private List<Post> postList = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Post> postList = new ArrayList<>();
 
-	// 수정 메서드
-	public void updateBoard(BoardDto.RequestDto request) {
-		this.name = request.name();
-		this.isAnonymous = request.isAnonymous();
-		this.category = request.category();
-	}
+    // 수정 메서드
+    public void updateBoard(BoardDto.RequestDto request) {
+        this.name = request.name();
+        this.isAnonymous = request.isAnonymous();
+        this.category = request.category();
+    }
 }
