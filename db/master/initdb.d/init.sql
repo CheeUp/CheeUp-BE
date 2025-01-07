@@ -146,7 +146,7 @@ CREATE TABLE post_reports (
                               member_id BIGINT NOT NULL,
                               post_id BIGINT NOT NULL,
                               reason VARCHAR(255) NOT NULL,
-                              status REPORT_STATUS NOT NULL DEFAULT 'pending',
+                              status REPORT_STATUS NOT NULL DEFAULT 'PENDING',
                               created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                               updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -175,7 +175,7 @@ CREATE TABLE comment_reports (
                                  member_id BIGINT NOT NULL,
                                  comment_id BIGINT NOT NULL,
                                  reason VARCHAR(255) NOT NULL,
-                                 status REPORT_STATUS NOT NULL DEFAULT 'pending',
+                                 status REPORT_STATUS NOT NULL DEFAULT 'PENDING',
                                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
