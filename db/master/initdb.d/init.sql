@@ -109,7 +109,7 @@ CREATE TABLE posts (
                        likes int DEFAULT 0 NOT NULL,
                        hit INT NOT NULL DEFAULT 0,
                        scrap INT NOT NULL DEFAULT 0,
-                       isAnonymous BOOLEAN NOT NULL,
+                       is_anonymous BOOLEAN NOT NULL,
                        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                        deleted_at TIMESTAMP NULL DEFAULT NULL
