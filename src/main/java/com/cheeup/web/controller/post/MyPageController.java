@@ -20,7 +20,7 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<ApiResponse<ReadMyPostsDto.Response>> getMyPosts(
+    public ResponseEntity<ApiResponse<ReadMyPostsDto.ResponseDto>> getMyPosts(
             @PathVariable long id,
             @RequestParam(
                     required = false,
@@ -31,7 +31,7 @@ public class MyPageController {
                     defaultValue = "10"
             ) int limit
     ){
-        ReadMyPostsDto.Response myPosts = myPageService.getMyPosts(id, page, limit);
+        ReadMyPostsDto.ResponseDto myPosts = myPageService.getMyPosts(id, page, limit);
 
         return ResponseEntity
                 .status(MyPageSuccessCode.MY_PAGE_READ.getHttpStatus())

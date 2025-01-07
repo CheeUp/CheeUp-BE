@@ -1,6 +1,7 @@
 package com.cheeup.converter.member;
 
 import com.cheeup.domain.member.Member;
+import com.cheeup.web.dto.community.MyPostDto;
 import com.cheeup.web.dto.community.ReadMyPostsDto;
 import com.cheeup.web.dto.member.CreateMemberDto;
 import com.cheeup.web.dto.member.ReadMemberDto;
@@ -18,6 +19,6 @@ public interface MemberMapper {
     Member toEntity(CreateMemberDto.Request request);
 
     @Mapping(source = "id", target = "memberId")
-    ReadMyPostsDto.AuthorResponse toAuthorDto(Member member);
+    MyPostDto.AuthorResponse toAuthorDto(Member member);
 
 }

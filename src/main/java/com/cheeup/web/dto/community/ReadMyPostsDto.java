@@ -8,32 +8,10 @@ import java.util.List;
 public class ReadMyPostsDto {
 
     @Builder
-    public record Response(
+    public record ResponseDto(
         Pagination pagination,
-        List<PostResponse> posts
+        List<MyPostDto.PostResponse> posts
     ) {
     }
 
-    public record PostResponse (
-            Long postId,
-            Long boardId,
-            String title,
-            String content,
-            String createdAt,
-            int hits,
-            int likes,
-            int commentCount,
-            AuthorResponse author
-    ) {
-    }
-
-    @Builder
-    public record AuthorResponse(
-            Long memberId,
-            String profileImageUrl,
-            String nickname,
-            int experience,
-            String tier
-    ) {
-    }
 }

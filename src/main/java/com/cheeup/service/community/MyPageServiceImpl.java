@@ -9,6 +9,7 @@ import com.cheeup.domain.member.Member;
 import com.cheeup.repository.comunity.MyPageRepository;
 import com.cheeup.repository.member.MemberRepository;
 import com.cheeup.web.dto.common.Pagination;
+import com.cheeup.web.dto.community.MyPostDto;
 import com.cheeup.web.dto.community.ReadMyPostsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,13 +28,13 @@ public class MyPageServiceImpl implements MyPageService {
     private final MemberMapper memberMapper;
 
     @Override
-    public ReadMyPostsDto.Response getMyPosts(long id, int page, int limit) {
+    public ReadMyPostsDto.ResponseDto getMyPosts(long id, int page, int limit) {
 
         Page<Post> posts = getPostPagesByMemberId(id, page, limit);
-        List<ReadMyPostsDto.PostResponse> list = posts.getContent().stream().map(
+        List<MyPostDto.PostResponse> list = posts.getContent().stream().map(
                 post -> {
                     Member author = post.getMember();
-                    ReadMyPostsDto.AuthorResponse authorDto = memberMapper.toAuthorDto(author);
+                    MyPostDto.AuthorResponse authorDto = memberMapper.toAuthorDto(author);
 
                     return myPostMapper.toPostDto(
                             post,
