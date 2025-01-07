@@ -39,8 +39,8 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         JobNotice jobNotice = jobNoticeMapper.toEntity(requestDto);
 
         List<JobNoticeJob> jobNoticeJobList = requestDto.jobs().stream()
-                .map(jobDto -> {
-                    Job job = jobRepository.findByIdAndName(jobDto.id(), jobDto.name())
+                .map(jobId -> {
+                    Job job = jobRepository.findById(jobId)
                             .orElseThrow(() -> new JobException(
                                     JobErrorCode.JOB_NOT_FOUND));
 
@@ -56,8 +56,8 @@ public class JobNoticeServiceImpl implements JobNoticeService {
                     JobDescription jobDescription = jobDescriptionMapper.toEntity(jobDescriptionDto);
 
                     List<JobDescriptionSkill> jobDescriptionSkillList = jobDescriptionDto.skills().stream()
-                            .map(skillDto -> {
-                                Skill skill = skillRepository.findById(skillDto.id())
+                            .map(skillId -> {
+                                Skill skill = skillRepository.findById(skillId)
                                         .orElseThrow(() -> new SkillException(SkillErrorCode.SKILL_NOT_FOUND));
 
                                 JobDescriptionSkill jobDescriptionSkill = JobDescriptionSkill.builder().build();
