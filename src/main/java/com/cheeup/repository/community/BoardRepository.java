@@ -1,4 +1,4 @@
-package com.cheeup.repository;
+package com.cheeup.repository.community;
 
 import com.cheeup.domain.community.Board;
 import org.springframework.data.jpa.repository.JpaRepository;

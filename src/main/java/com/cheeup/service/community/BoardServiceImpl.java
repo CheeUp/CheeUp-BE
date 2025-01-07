@@ -5,7 +5,7 @@ import com.cheeup.apiPayload.exception.handler.BadRequestException;
 import com.cheeup.apiPayload.exception.handler.NotFoundException;
 import com.cheeup.converter.community.BoardMapper;
 import com.cheeup.domain.community.Board;
-import com.cheeup.repository.BoardRepository;
+import com.cheeup.repository.community.BoardRepository;
 import com.cheeup.web.dto.community.BoardDto;
 import java.util.List;
 import java.util.stream.Collectors;
