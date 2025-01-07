@@ -3,6 +3,7 @@ package com.cheeup.service.community;
 import com.cheeup.apiPayload.code.error.codes.MemberErrorCode;
 import com.cheeup.apiPayload.exception.handler.MemberException;
 import com.cheeup.converter.community.MyPostMapper;
+import com.cheeup.converter.member.MemberMapper;
 import com.cheeup.domain.community.Post;
 import com.cheeup.domain.member.Member;
 import com.cheeup.repository.comunity.MyPageRepository;
@@ -23,6 +24,7 @@ public class MyPageServiceImpl implements MyPageService {
     private final MemberRepository memberRepository;
     private final MyPageRepository myPageRepository;
     private final MyPostMapper myPostMapper;
+    private final MemberMapper memberMapper;
 
     @Override
     public ReadMyPostsDto.Response getMyPosts(long id, int page, int limit) {
@@ -31,7 +33,7 @@ public class MyPageServiceImpl implements MyPageService {
         List<ReadMyPostsDto.PostResponse> list = posts.getContent().stream().map(
                 post -> {
                     Member author = post.getMember();
-                    ReadMyPostsDto.AuthorResponse authorDto = myPostMapper.toAuthorDto(author);
+                    ReadMyPostsDto.AuthorResponse authorDto = memberMapper.toAuthorDto(author);
 
                     return myPostMapper.toPostDto(
                             post,

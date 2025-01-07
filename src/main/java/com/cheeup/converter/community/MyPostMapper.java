@@ -15,8 +15,5 @@ public interface MyPostMapper {
     @Mapping(source = "post.id", target = "postId")
     ReadMyPostsDto.PostResponse toPostDto(Post post, long boardId, int commentCount, ReadMyPostsDto.AuthorResponse author);
 
-    @Mapping(source = "id", target = "memberId")
-    ReadMyPostsDto.AuthorResponse toAuthorDto(Member member);
-
     ReadMyPostsDto.Response toDto(List<ReadMyPostsDto.PostResponse> posts, Pagination pagination);
 }
