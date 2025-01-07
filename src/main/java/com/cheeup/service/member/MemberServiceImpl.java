@@ -17,6 +17,7 @@ import com.cheeup.repository.common.SkillRepository;
 import com.cheeup.repository.member.MemberPreferredJobRepository;
 import com.cheeup.repository.member.MemberRepository;
 import com.cheeup.repository.member.MemberSkillRepository;
+import com.cheeup.web.dto.member.CreateMemberDto;
 import com.cheeup.web.dto.member.ReadMemberDto;
 import com.cheeup.web.dto.member.UpdateMemberDto;
 import lombok.RequiredArgsConstructor;
@@ -62,25 +63,53 @@ public class MemberServiceImpl implements MemberService {
 
         clearMemberSkills(findMember);
         if(request.skills() != null) {
-            List<MemberSkill> memberSkillList = mapMemberSkillsFromRequest(request, findMember);
+            List<MemberSkill> memberSkillList = mapMemberSkillsFromRequest(request.skills(), findMember);
             memberSkillRepository.saveAll(memberSkillList);
         }
 
         clearMemberPreferredJobs(findMember);
         if(request.preferredJobs() != null) {
-            List<MemberPreferredJob> memberPreferredJobList = mapMemberPreferredJobsFromRequest(request, findMember);
+            List<MemberPreferredJob> memberPreferredJobList = mapMemberPreferredJobsFromRequest(request.preferredJobs(), findMember);
             memberPreferredJobRepository.saveAll(memberPreferredJobList);
         }
     }
 
-    private List<MemberSkill> mapMemberSkillsFromRequest(UpdateMemberDto.Request request, Member member) {
-        return request.skills().stream()
+    @Override
+    @Transactional
+    public void createMember(CreateMemberDto.Request request) {
+        Member member = memberMapper.toEntity(request);
+        memberRepository.save(member);
+
+        if(request.skills() != null) {
+            List<MemberSkill> memberSkillList = mapMemberSkillsFromRequest(request.skills(), member);
+            memberSkillRepository.saveAll(memberSkillList);
+        }
+
+        if(request.preferredJobs() != null) {
+            List<MemberPreferredJob> memberPreferredJobList = mapMemberPreferredJobsFromRequest(request.preferredJobs(), member);
+            memberPreferredJobRepository.saveAll(memberPreferredJobList);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public void deleteMember(long id) {
+        Member deleteMember = memberRepository.findById(id).orElseThrow(
+                () -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
+        ).delete();
+        System.out.println("deleteMember = " + deleteMember.getDeletedAt());
+        memberRepository.save(deleteMember);
+    }
+
+    private List<MemberSkill> mapMemberSkillsFromRequest(List<Long> skills, Member member) {
+        return skills.stream()
                 .map( skillId -> createMemberSkill(skillId, member))
                 .toList();
     }
 
-    private List<MemberPreferredJob> mapMemberPreferredJobsFromRequest(UpdateMemberDto.Request request, Member member) {
-        return request.preferredJobs().stream()
+    private List<MemberPreferredJob> mapMemberPreferredJobsFromRequest(List<Long> preferredJobs, Member member) {
+        return preferredJobs.stream()
                 .map( jobId -> createMemberPreferredJob(jobId, member))
                 .toList();
     }

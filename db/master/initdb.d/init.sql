@@ -21,10 +21,10 @@ CREATE TABLE major_categories (
 
 
 
-CREATE TYPE MEMBER_ROLE AS ENUM ('guest', 'member', 'admin');
-CREATE TYPE FILE_TYPE AS ENUM ('image', 'video', 'etc');
-CREATE TYPE REPORT_STATUS AS ENUM ('pending', 'in_progress', 'completed');
-CREATE TYPE TIER AS ENUM ('bronze','silver', 'gold', 'platinum', 'diamond', 'ruby');
+CREATE TYPE MEMBER_ROLE AS ENUM ('GUEST', 'MEMBER', 'ADMIN');
+CREATE TYPE FILE_TYPE AS ENUM ('IMAGE', 'VIDEO', 'ETC');
+CREATE TYPE REPORT_STATUS AS ENUM ('PENDING', 'IN_PROGRESS', 'COMPLETED');
+CREATE TYPE TIER AS ENUM ('BRONZE','SILVER', 'GOLD', 'PLATINUM', 'DIAMOND', 'RUBY');
 CREATE TYPE ACTIVITY_TYPE AS ENUM ('글 작성');
 
 CREATE TABLE members (
@@ -33,12 +33,12 @@ CREATE TABLE members (
                          name VARCHAR(20) NOT NULL,
                          email VARCHAR(50) NOT NULL UNIQUE,
                          nickname VARCHAR(20) NOT NULL UNIQUE,
-                         role MEMBER_ROLE NOT NULL DEFAULT 'guest',
+                         role MEMBER_ROLE NOT NULL DEFAULT 'GUEST',
                          github_url VARCHAR(255) NULL,
                          profile_image_url VARCHAR(255) NULL,
                          is_activated BOOLEAN NOT NULL DEFAULT TRUE,
                          experience INT NOT NULL DEFAULT 0,
-                         tier TIER NOT NULL DEFAULT 'bronze',
+                         tier TIER NOT NULL DEFAULT 'BRONZE',
                          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          deleted_at TIMESTAMP NULL DEFAULT NULL
@@ -146,7 +146,7 @@ CREATE TABLE post_reports (
                               member_id BIGINT NOT NULL,
                               post_id BIGINT NOT NULL,
                               reason VARCHAR(255) NOT NULL,
-                              status REPORT_STATUS NOT NULL DEFAULT 'pending',
+                              status REPORT_STATUS NOT NULL DEFAULT 'PENDING',
                               created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                               updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -175,7 +175,7 @@ CREATE TABLE comment_reports (
                                  member_id BIGINT NOT NULL,
                                  comment_id BIGINT NOT NULL,
                                  reason VARCHAR(255) NOT NULL,
-                                 status REPORT_STATUS NOT NULL DEFAULT 'pending',
+                                 status REPORT_STATUS NOT NULL DEFAULT 'PENDING',
                                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
