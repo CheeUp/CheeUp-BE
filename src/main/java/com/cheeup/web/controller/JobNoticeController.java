@@ -15,11 +15,9 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class JobNoticeController {
     private final JobNoticeService jobNoticeService;
 
-    @Transactional
     @PostMapping("/job-notice")
     public ResponseEntity<ApiResponse<Void>> createJobNotice(
             @Valid @RequestBody PostJobNoticeDto.RequestDto requestDto) {
