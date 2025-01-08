@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -32,6 +33,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "posts")
 public class Post {
@@ -80,4 +82,14 @@ public class Post {
     @Builder.Default
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getPostList().add(this);
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        board.getPostList().add(this);
+    }
 }

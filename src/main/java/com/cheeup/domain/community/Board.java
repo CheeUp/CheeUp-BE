@@ -43,6 +43,7 @@ public class Board {
     @Column(nullable = false)
     private Boolean isAnonymous;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BoardCategory category;
 

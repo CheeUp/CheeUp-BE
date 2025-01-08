@@ -2,7 +2,6 @@ package com.cheeup.apiPayload.exception;
 
 import com.cheeup.apiPayload.ApiResponse;
 import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
