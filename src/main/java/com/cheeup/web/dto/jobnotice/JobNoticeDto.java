@@ -1,11 +1,8 @@
 package com.cheeup.web.dto.jobnotice;
 
 import com.cheeup.validation.annotation.ExistJobDescriptionType;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
 import java.util.List;
 
 public record JobNoticeDto() {
@@ -39,7 +36,7 @@ public record JobNoticeDto() {
             String requirement,
             String preferredRequirement,
             @NotEmpty(message = "기술 스택이 비어 있습니다.")
-            List<Long> skills
+            List<Long> skillIds
     ) {
     }
 }
