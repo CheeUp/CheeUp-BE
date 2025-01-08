@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -63,7 +62,7 @@ public class Member {
     @Column(length = 20)
     private String groups;
 
-    @Column( length = 20)
+    @Column(length = 20)
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'GUEST'")
     private MemberRole role;
@@ -76,6 +75,7 @@ public class Member {
 
     @Column
     @ColumnDefault("true")
+//    @Builder.Default
     private Boolean isActivated = true;
 
     @Column(columnDefinition = "INTEGER DEFAULT 0")

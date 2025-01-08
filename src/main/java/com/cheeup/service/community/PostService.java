@@ -1,12 +1,16 @@
 package com.cheeup.service.community;
 
 import com.cheeup.web.dto.community.CreatePostDto;
+import com.cheeup.web.dto.community.ReadPostDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface PostService {
+
+    //TODO: S3 파일 업로드 구현 추가하기
+
     // 게시글 상세 조회
-    void getPost();
+    ReadPostDto.DetailResponseDto getPost(Long postId);
 
     // 게시글 목록 조회
     void getPostList();
