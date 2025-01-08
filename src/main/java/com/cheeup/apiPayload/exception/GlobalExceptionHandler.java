@@ -4,13 +4,13 @@ import com.cheeup.apiPayload.ApiResponse;
 import com.cheeup.apiPayload.code.error.codes.ValidationErrorCode;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,21 +39,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.onFailure(code, message));
     }
 
-    // @Valid 로 검증 실패했을때 발생하는 Exception handler.
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatusCode status,
-                                                                  WebRequest request) {
-
-        BindingResult bindingResult = ex.getBindingResult();
-
-        String code = "COMMON_400";
-        String message = Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage();
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ApiResponse.onFailure(code, message));
-    }
-
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
                                                              HttpStatusCode statusCode, WebRequest request) {
@@ -76,8 +61,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         String errorCode = errors.isEmpty() ? null : errors.values().iterator().next();
 
-        return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, ValidationErrorCode.valueOf(errorCode), request,
-                errors);
+        if (isValidErrorCode(errorCode)) {
+            return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, ValidationErrorCode.valueOf(errorCode), request,
+                    errors);
+        } else {
+            String code = "COMMON_400";
+            String message = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage();
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.onFailure(code, message));
+        }
     }
 
     private ResponseEntity<Object> handleExceptionInternalArgs(Exception e, HttpHeaders headers,
@@ -92,6 +85,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 validationErrorCode.getHttpStatus(),
                 request
         );
+    }
+
+    public static boolean isValidErrorCode(String errorCode) {
+        try {
+            ValidationErrorCode.valueOf(errorCode);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }
 

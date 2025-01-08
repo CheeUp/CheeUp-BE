@@ -14,7 +14,7 @@ public class ApiResponse<T> {
     private T result;
 
     public static <T> ApiResponse<T> onSuccess(SuccessCode successCode, T result) {
-        return new ApiResponse<>(false, successCode.getCode(), successCode.getMessage(), result);
+        return new ApiResponse<>(true, successCode.getCode(), successCode.getMessage(), result);
     }
 
     public static <T> ApiResponse<T> onFailure(ErrorCode errorCode) {

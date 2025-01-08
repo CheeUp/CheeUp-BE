@@ -12,6 +12,8 @@ public class ReadMemberDto {
             String email,
             String groups,
             String profileImage,
+            String tier,
+            Integer experience,
             List<String> skills,
             List<String> preferredJobs,
             boolean isActivated

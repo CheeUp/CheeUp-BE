@@ -49,26 +49,24 @@ public class Post {
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String title;
 
-    @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer likes;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
     private Integer scraps;
 
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Column( columnDefinition = "INTEGER DEFAULT 0")
     private Integer hits;
 
-    @Column(nullable = false)
     private Boolean isAnonymous;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
