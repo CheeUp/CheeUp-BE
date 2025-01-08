@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum MyPageSuccessCode implements SuccessCode {
-    MY_PAGE_READ(HttpStatus.OK, "MYPAGE2001", "내 게시물 조회 성공했습니다.");
+    MY_PAGE_READ(HttpStatus.OK, "MYPAGE2001", "내 게시물 조회 성공했습니다."),
+    MY_SCRAP_POST_READ(HttpStatus.OK, "MYPAGE2002", "내 스크랩 게시물 조회에 성공했습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
