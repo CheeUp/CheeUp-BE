@@ -87,10 +87,8 @@ public class JobNoticeServiceImpl implements JobNoticeService {
                 LocalDate.of(year, month, 1).lengthOfMonth()).plusDays(7);
 
         List<JobNotice> jobNoticeList = jobNoticeRepository.findAllByDateRange(startOfMonth, endOfMonth);
-        List<GetAllJobNoticesDto.ResponseDto> result = new ArrayList<>();
-        for (JobNotice jobNotice : jobNoticeList) {
-            result.add(jobNoticeMapper.toResponseDto(jobNotice));
-        }
-        return result;
+        return jobNoticeRepository.findAllByDateRange(startOfMonth, endOfMonth).stream()
+                .map(jobNoticeMapper::toResponseDto)
+                .toList();
     }
 }
