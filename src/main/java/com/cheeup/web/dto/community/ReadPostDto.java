@@ -1,9 +1,10 @@
 package com.cheeup.web.dto.community;
 
 import com.cheeup.web.dto.member.ReadMemberDto;
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.Builder;
 
 public record ReadPostDto() {
 
@@ -11,7 +12,7 @@ public record ReadPostDto() {
     // 단일 게시글의 경우 Comment 정보가 추가적으로 필요하다
     @Builder
     public record DetailResponseDto(
-            Long postId,
+            Long id,
             BoardDto.ResponseDto board,
             ReadMemberDto.ResponseDto member,
             String title,
