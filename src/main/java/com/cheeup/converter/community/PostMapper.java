@@ -10,4 +10,6 @@ public interface PostMapper {
     Post toEntity(CreatePostDto.RequestDto requestDto);
 
     ReadPostDto.DetailResponseDto toDetailResponseDto(Post post);
+
+    ReadPostDto.ListResponseDto toListResponseDto(Post post, int commentCount);
 }

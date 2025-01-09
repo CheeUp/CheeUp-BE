@@ -2,6 +2,7 @@ package com.cheeup.service.community;
 
 import com.cheeup.web.dto.community.CreatePostDto;
 import com.cheeup.web.dto.community.ReadPostDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public interface PostService {
     ReadPostDto.DetailResponseDto getPost(Long postId);
 
     // 게시글 목록 조회
-    void getPostList();
+    Page<ReadPostDto.ListResponseDto> getPostList(Long boardId, int page, int limit);
 
     // 게시글 작성
     void createPost(CreatePostDto.RequestDto requestDto);

@@ -32,10 +32,16 @@ public record ReadPostDto() {
     // 게시글 목록의 경우 Comment 정보가 필요없다.
     @Builder
     public record ListResponseDto(
-            Long postId,
-            Long boardId,
+            Long id,
+            ReadMemberDto.ResponseDto member,
             String title,
-            Boolean isAnonymous
+            String content,
+            Integer likes,
+            Integer scraps, // 일단 사용하지 않는다고 했지만 포함헀음
+            Integer hits,
+            Boolean isAnonymous,
+            LocalDateTime createdAt,
+            Integer commentCount
     ) {
     }
 }

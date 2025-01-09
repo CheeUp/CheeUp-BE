@@ -3,7 +3,6 @@ package com.cheeup.service.community;
 import com.cheeup.apiPayload.code.error.codes.CommunityErrorCode;
 import com.cheeup.apiPayload.code.error.codes.MemberErrorCode;
 import com.cheeup.apiPayload.exception.handler.NotFoundException;
-import com.cheeup.converter.community.CommentMapper;
 import com.cheeup.converter.community.PostMapper;
 import com.cheeup.domain.community.Board;
 import com.cheeup.domain.community.Post;
@@ -14,15 +13,21 @@ import com.cheeup.repository.member.MemberRepository;
 import com.cheeup.web.dto.community.CreatePostDto;
 import com.cheeup.web.dto.community.ReadPostDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final PostMapper postMapper;
-    private final CommentMapper commentMapper;
 
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
@@ -32,18 +37,29 @@ public class PostServiceImpl implements PostService {
     public ReadPostDto.DetailResponseDto getPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException(CommunityErrorCode.POST_NOT_FOUND));
-//        List<Comment> commentList = post.getCommentList();
-//        List<ReadCommentDto.ResponseDto> commentDtoList = new ArrayList<>();
-//        for (Comment comment : commentList) {
-//            commentDtoList.add(commentMapper.toCommentDto(comment));
-//        }
-//        post.setCommentList(commentList);
         return postMapper.toDetailResponseDto(post);
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public void getPostList() {
+    public Page<ReadPostDto.ListResponseDto> getPostList(Long boardId, int page, int limit) {
+        // 존제하는 게시판인지 확인
+        if (!boardRepository.existsById(boardId)) {
+            throw new NotFoundException(CommunityErrorCode.BOARD_NOT_FOUND);
+        }
 
+        // 페이지네이션을 위한 Pageable 객체 생성
+        Pageable pageable = PageRequest.of(page - 1, limit);
+
+        Page<Post> postPage = postRepository.findAllByBoardId(boardId, pageable);
+
+        // Page에서 content (현재 페이지의 게시글 목록)을 가져와서 변환
+        List<ReadPostDto.ListResponseDto> responseDtoList = postPage.getContent().stream()
+                .map(post -> postMapper.toListResponseDto(post, post.getCommentList().size()))
+                .collect(Collectors.toList());
+
+        // 반환 타입을 Page로 감싸서 반환
+        return new PageImpl<>(responseDtoList, pageable, postPage.getTotalElements());
     }
 
     @Override
