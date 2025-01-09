@@ -63,11 +63,11 @@ public class MyPageServiceImpl implements MyPageService {
     public ReadMyPostsDto.ResponseDto getMyScrappedPosts(long memberId, int page, int limit) {
         Page<PostScrap> postScraps = getScrappedPostPagesByMemberId(memberId, page, limit);
         List<MyPostDto.PostResponse> list = postScraps.getContent().stream().map(
-                sp -> {
-                    Member member = sp.getMember();
+                postScrap -> {
+                    Member member = postScrap.getMember();
 
                     MyPostDto.AuthorResponse author = memberMapper.toAuthorDto(member);
-                    Post post = sp.getPost();
+                    Post post = postScrap.getPost();
 
                     return myPostMapper.toPostDto(
                             post,
