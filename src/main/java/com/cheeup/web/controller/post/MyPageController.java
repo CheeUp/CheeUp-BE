@@ -24,7 +24,7 @@ public class MyPageController {
             @PathVariable long id,
             @RequestParam(
                     required = false,
-                    defaultValue = "1"
+                    defaultValue = "0"
             ) int page,
             @RequestParam(
                     required = false,
@@ -38,4 +38,22 @@ public class MyPageController {
                 .body(ApiResponse.onSuccess(MyPageSuccessCode.MY_PAGE_READ, myPosts));
     }
 
+    @GetMapping("/scrapped-posts/{memberId}")
+    public ResponseEntity<ApiResponse<ReadMyPostsDto.ResponseDto>> getMyScrappedPosts(
+            @PathVariable long memberId,
+            @RequestParam(
+                    required = false,
+                    defaultValue = "0"
+            ) int page,
+            @RequestParam(
+                    required = false,
+                    defaultValue = "10"
+            ) int limit
+    ) {
+        ReadMyPostsDto.ResponseDto response = myPageService.getMyScrappedPosts(memberId, page, limit);
+
+        return ResponseEntity
+                .status(MyPageSuccessCode.MY_SCRAP_POST_READ.getHttpStatus())
+                .body(ApiResponse.onSuccess(MyPageSuccessCode.MY_SCRAP_POST_READ, response));
+    }
 }

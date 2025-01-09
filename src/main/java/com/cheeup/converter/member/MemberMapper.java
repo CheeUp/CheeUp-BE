@@ -2,7 +2,6 @@ package com.cheeup.converter.member;
 
 import com.cheeup.domain.member.Member;
 import com.cheeup.web.dto.community.MyPostDto;
-import com.cheeup.web.dto.community.ReadMyPostsDto;
 import com.cheeup.web.dto.member.CreateMemberDto;
 import com.cheeup.web.dto.member.ReadMemberDto;
 import org.mapstruct.Mapper;
