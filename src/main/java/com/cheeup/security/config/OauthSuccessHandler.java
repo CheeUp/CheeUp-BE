@@ -55,16 +55,9 @@ public class OauthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         String email = oauth2User.getEmail();
         switch (memberRole) {
             case MEMBER:
-                System.out.println("email = " + email);
                 Member findMember = memberRepository.findByEmail(email);
                 String token = jwtUtil.createAccessToken(String.valueOf(findMember.getId()), List.of(findMember.getRole()));
                 response.addCookie(cookieUtil.createCookie("Authorization", token));
-                System.out.println(request.getRequestURI());
-                System.out.println(request.getRequestURL().toString());
-                System.out.println(request.getRemoteHost());
-                System.out.println(request.getLocalAddr());
-                System.out.println(request.getRemoteAddr());
-                System.out.println(request.getRemotePort());
                 response.sendRedirect(CLIENT_URL);
                 break;
             case GUEST:
