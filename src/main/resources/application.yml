@@ -15,3 +15,14 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 jwt:
   secret: ${JWT_SECRET}
+  access-token:
+    expiration-second: 3600000 # 60*60 * 1000
+  refresh-token:
+    expiration-second: 86400000 # 60*60*24 * 1000
+
+logging:
+  level:
+    org.springframework.security: debug
+
+client:
+  url: 127.0.0.1:5500

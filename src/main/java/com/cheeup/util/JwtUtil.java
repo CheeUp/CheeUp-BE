@@ -1,28 +1,36 @@
 package com.cheeup.util;
 
-import com.cheeup.constant.CookieConstant;
 import com.cheeup.domain.enums.MemberRole;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class JwtUtil {
 
+    // 시간단위 : MS
 
-    private SecretKey secretKey;
-    private final Long TTL = CookieConstant.ACCESS_TOKEN_EXPIRE_SECOND;
+    private final SecretKey secretKey;
 
-    public JwtUtil(@Value("${jwt.secret}") String secret) {
+
+    private final long accessExpirationMillis;
+
+    private final long refreshExpirationMillis;
+
+    public JwtUtil(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.access-token.expiration-second}") long accessExpirationMillis,
+            @Value("${jwt.refresh-token.expiration-second}") long refreshExpirationMillis) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+        this.accessExpirationMillis = accessExpirationMillis;
+        this.refreshExpirationMillis = refreshExpirationMillis;
     }
 
     public String getMemberId(String token) {
@@ -30,7 +38,6 @@ public class JwtUtil {
     }
 
     public List<String> getRoles(String token) {
-        parsePayload(token, "", List.class);
         return (List<String>) parsePayload(token, "role", List.class);
     }
 
@@ -41,39 +48,32 @@ public class JwtUtil {
                 .get(key, clazz);
     }
 
-    public String createToken(String memberId, List<MemberRole> roles) {
+    public String createAccessToken(String memberId, List<MemberRole> roles) {
+        return createToken(memberId, roles, accessExpirationMillis);
+    }
+
+    public String createRefreshToken(String memberId, List<MemberRole> roles) {
+        return createToken(memberId, roles, refreshExpirationMillis);
+    }
+
+
+    private String createToken(String memberId, List<MemberRole> roles, long expiration) {
         return Jwts.builder()
                 .claim("memberId", memberId)
                 .claim("role", roles.stream().map(Enum::name).toList())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TTL))
+                .issuedAt(generateIssuedAt())
+                .expiration(generateTokenExpiration(expiration))
                 .signWith(secretKey)
                 .compact();
     }
 
+    private Date generateIssuedAt() {
+        return Date.from(ZonedDateTime.now().toInstant());
 
-    public String createToken(String memberId, String role) {
-        return Jwts.builder()
-                .claim("memberId", memberId)
-                .claim("role", List.of(role))
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TTL))
-                .signWith(secretKey)
-                .compact();
     }
 
-    public String createToken(String memberId, Collection<? extends GrantedAuthority> authorities) {
-        return Jwts.builder()
-                .claim("memberId", memberId)
-                .claim("role", authorities.stream().map(GrantedAuthority::getAuthority))
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TTL))
-                .signWith(secretKey)
-                .compact();
+    private Date generateTokenExpiration(long delta) {
+        return Date.from(ZonedDateTime.now().plusSeconds(delta).toInstant());
     }
 
 }
-
-//    public boolean isExpired(String token) {
-//        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
-//    }
